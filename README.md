@@ -9,4 +9,4 @@ Then they will be sent to their profile page which shows the Senator and House o
 
 **Stage 2: Leaderboard**
 
-When representatives regsiter, we want to show them on this table to "sort-of" show the more progressive ones.
+When representatives register, we want to show them on this table to "sort-of" show the more progressive ones.
