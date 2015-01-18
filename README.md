@@ -16,7 +16,7 @@ Then we can have a slogan: *Is your representative on board? Ask why not* the li
 - tweet
 - facebook post
 - email
-- 
+
 introducing themselves as members of the constituency and the platform as a means for communication between the representatives and those they represent.
 
 **Notes**
