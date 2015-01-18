@@ -25,4 +25,4 @@ Ask *yarep* to join the roundtable
 
 Hear from *yarep* on **burning-issue**
 
-*trending-issues* -- shown
+*trending-issues* across constituencies
