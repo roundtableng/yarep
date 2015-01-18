@@ -10,9 +10,12 @@ Then they will be sent to their profile page which shows the Senator and House o
 **Stage 2: Leaderboard**
 
 When representatives register, we want to show them on this table to "sort-of" show the more progressive ones.
+Then we can have a slogan: *Is your representative on board? Ask why not*
 
 **Notes**
 
 Ask *yarep* to join the roundtable
+
 Hear from *yarep* on **burning-issue**
-*trending-issues*
+
+*trending-issues* -- shown
