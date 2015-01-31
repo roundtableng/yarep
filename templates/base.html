@@ -51,6 +51,7 @@
     </head>
     <body class="landing">
       {% block body %}
+      {% block fb %}{% endblock fb %}
 
         <!-- Header -->
             <header id="header">
@@ -63,6 +64,12 @@
                         <li><a href="">Contact us</a></li>
                     </ul>
                 </nav>
+                <div
+                      class="fb-like"
+                        data-share="true"
+                          data-width="450"
+                            data-show-faces="true">
+                        </div>
                 {% endblock navbar %}
 
             </header>
