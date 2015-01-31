@@ -1,0 +1,175 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<!--
+    Interphase by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html lang="en">
+    <head>
+    {% block head %}
+      {% block meta %}
+        <meta charset="UTF-8">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+      {% endblock meta %}
+      {% block extra-meta %}{% endblock extra-meta %}
+
+      <title>{% block title %}Nigerian Roundtable{% endblock title %}</title>
+      {% block js %}
+        <!--[if lte IE 8]><script src="{% static 'css/ie/html5shiv.js' %}"></script><![endif]-->
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/skel.min.js' %}"></script>
+        <script src="{% static 'js/skel-layers.min.js' %}"></script>
+      {% endblock js %}
+
+      {% block contact_form_css %}
+       <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
+       <link href="{% static 'css/contactform.css' %}" rel="stylesheet" type="text/css" media="all" />
+
+      {% endblock contact_form_css %}
+      {% block css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/skel.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style-xlarge.css' %}" />
+        <!--[if lte IE 8]><link rel="stylesheet" href="{% static 'css/ie/v8.css' %}" /><![endif]-->
+      {% endblock css %}
+
+      {% block extra-css %}
+      
+      {% endblock extra-css %}
+
+      {% block header-js %}{% endblock header-js %}
+      {% block extra-header-js %}{% endblock extra-header-js %}
+
+      {% block shims %}
+      {% endblock shims %}
+
+      {% endblock head %}
+      {% block extra-head %}{% endblock extra-head %}
+    </head>
+    <body class="landing">
+      {% block body %}
+
+        <!-- Header -->
+            <header id="header">
+                <h1><a href="{% url 'home' %}">Nigerian Roundtable</a></h1>
+
+                {% block navbar %}
+                <nav id="nav">
+                    <ul>
+                        <li><a href="">Roundtable</a></li>
+                        <li><a href="">Contact us</a></li>
+                    </ul>
+                </nav>
+                {% endblock navbar %}
+
+            </header>
+
+        <!-- Banner -->
+            <section id="banner">
+                <h2>Our destinies cannot be left in the hands of "leaders"!</h2>
+                <p>... Let's discuss!</p>
+                <div class="wrap">
+                    <!-- strat-contact-form --> 
+                    <div class="contact-form">
+                    <!-- start-form -->
+                        <form class="contact_form" action="#" method="post" name="contact_form">
+                            <h1>Login Into Your Account</h1>
+                            <ul>
+                                <li>
+                                    <input type="email" class="textbox1" name="email" placeholder="i@roundtableng.org" required />
+                                    <span class="form_hint">Enter a valid email</span>
+                                    <p><img src="{% static 'img/contact.png' %}" alt=""></p>
+                                </li>
+                                <li>
+                                    <input type="password" name="website" class="textbox2" placeholder="password">
+                                    <p><img src="{% static 'img/lock.png' %}" alt=""></p>
+                                </li>
+                             </ul>
+                                <input type="submit" name="Sign In" value="Sign In"/>
+                                <div class="clear"></div>   
+                            <div class="forgot">
+                                <a href="#">forgot password?</a>
+                            </div>  
+                            <div class="clear"></div>   
+                        </form>
+                    <!-- end-form -->
+                    <!-- start-account -->
+                    <div class="account">
+                        <h2><a href="#">Join the roundtable!</a></h2>
+                        <div class="span"><a href="#"><img src="{% static 'img/facebook.png' %}" alt=""/><i>Sign In with Facebook</i><div class="clear"></div></a></div>    
+                        <div class="span1"><a href="#"><img src="{% static 'img/twitter.png' %}" alt=""/><i>Sign In with Twitter</i><div class="clear"></div></a></div>
+                        <div class="span2"><a href="#"><img src="{% static 'img/gplus.png' %}" alt=""/><i>Sign In with Google+</i><div class="clear"></div></a></div>
+                    </div>  
+                    <!-- end-account -->
+                    <div class="clear"></div>   
+</div>
+<!-- end-contact-form -->
+                </div>
+            </section>
+
+
+        <!-- Footer -->
+            <footer id="footer">
+                <div class="container">
+                    <div class="row">
+                        <section class="4u 6u(medium) 12u$(small)">
+                            <h3>Lorem ipsum</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, cumque!</p>
+                            <ul class="alt">
+                                <li><a href="#">Lorem ipsum dolor sit amet.</a></li>
+                                <li><a href="#">Quod adipisci perferendis et itaque.</a></li>
+                                <li><a href="#">Itaque eveniet ullam, veritatis reiciendis?</a></li>
+                                <li><a href="#">Accusantium repellat accusamus a, soluta.</a></li>
+                            </ul>
+                        </section>
+                        <section class="4u 6u$(medium) 12u$(small)">
+                            <h3>Nostrum, repellat!</h3>
+                            <p>Tenetur voluptate exercitationem eius tempora! Obcaecati suscipit, soluta earum blanditiis.</p>
+                            <ul class="alt">
+                                <li><a href="#">Lorem ipsum dolor sit amet.</a></li>
+                                <li><a href="#">Id inventore, qui necessitatibus sunt.</a></li>
+                                <li><a href="#">Deleniti eum odit nostrum eveniet.</a></li>
+                                <li><a href="#">Illum consectetur quibusdam eos corporis.</a></li>
+                            </ul>
+                        </section>
+                        <section class="4u$ 12u$(medium) 12u$(small)">
+                            <h3>Contact Us</h3>
+                            <ul class="icons">
+                                <li><a href="#" class="icon rounded fa-twitter"><span class="label">Twitter</span></a></li>
+                                <li><a href="#" class="icon rounded fa-facebook"><span class="label">Facebook</span></a></li>
+                                <li><a href="#" class="icon rounded fa-pinterest"><span class="label">Pinterest</span></a></li>
+                                <li><a href="#" class="icon rounded fa-google-plus"><span class="label">Google+</span></a></li>
+                                <li><a href="#" class="icon rounded fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                            </ul>
+                            <ul class="tabular">
+                                <li>
+                                    <h3>Address</h3>
+                                    1234 Somewhere Road<br>
+                                    Nashville, TN 00000
+                                </li>
+                                <li>
+                                    <h3>Mail</h3>
+                                    <a href="#">someone@untitled.tld</a>
+                                </li>
+                                <li>
+                                    <h3>Phone</h3>
+                                    (000) 000-0000
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                    <ul class="copyright">
+                        <li>&copy; Untitled. All rights reserved.</li>
+                        <li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+                        <li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+                    </ul>
+                </div>
+            </footer>
+      {% block extra-js %}{% endblock extra-js %}
+    {% endblock body %}
+
+    </body>
+</html>
