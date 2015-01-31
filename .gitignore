@@ -58,3 +58,4 @@ target/
 
 # temp files
 *~
+.DS_Store
