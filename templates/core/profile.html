@@ -1,1 +1,16 @@
-Profile page
+{% extends "base.html" %}
+
+{% load static from staticfiles %}
+
+{% block extra-js %}
+{% endblock extra-js %}
+
+{% block middle %}
+  <!-- Banner -->
+  <section id="banner">
+      <h2>Welcome {{ user.username }}, {{ user.first_name }} </h2>
+  </section>
+{% endblock middle %}
+{% block fb %}
+<script type="text/javascript" src="{% static 'js/fb.js' %}"></script>
+{% endblock fb %}
