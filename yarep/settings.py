@@ -95,3 +95,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     #'compressor.finders.CompressorFinder',
 )
+
+# Twitter tokens
+CONSUMER_KEY = 'MDv9nlSEopUjHWSXe2Q0xfzst'
+CONSUMER_SECRET = 'Z23pEZyyZ7QnKvqoBTkJ5tEz2KH7y28VrRUgaFCAXodvVKGVcL'
