@@ -88,7 +88,7 @@
           $.post('/fblogin/', {
               'name': name,
               'email': email,
-              'csrf_token': csrf_token
+              'csrfmiddlewaretoken': csrf_token
       }, function(data){
           console.log(data);
       });
