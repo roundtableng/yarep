@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(
         template_name='core/home.html'), name="home"),
+    url(r'^fblogin/$', TemplateView.as_view(
+        template_name='fblogin.html'), name="home"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
