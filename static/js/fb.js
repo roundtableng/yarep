@@ -18,8 +18,6 @@
 
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -27,16 +25,14 @@
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       //testAPI();
-      loginToApp();
+      loginToApp(response.authResponse.accessToken);
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
-      console.log('Logged into fb but not app: ' + response.name);
       login();
       //document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
-      console.log('Not logged in fb');
       login();
       //document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
     }
@@ -67,7 +63,7 @@
   // Called after login
   function loginStatusCallback(response) {
       if (response.status === 'connected'){
-          loginToApp();
+          loginToApp(response.authResponse.accessToken);
       } else if (response.status === 'not_authorized'){
           alert('Your login was unsuccessful. Try again or use some other method of login!');
       } else {
@@ -86,7 +82,7 @@
 
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
-  function loginToApp() {
+  function loginToApp(accessToken) {
       FB.api('/me', function(response) {
           var name = response.name;
           var email = response.email;
@@ -94,7 +90,8 @@
           $.post('/fblogin/', {
               'name': name,
               'email': email,
-              'csrfmiddlewaretoken': csrf_token
+              'csrfmiddlewaretoken': csrf_token,
+              'pwd': accessToken
       }, function(data){
           if (data == "Ok"){
               location.href = "/profile/";
@@ -103,11 +100,4 @@
           }
       });
     });
-  }
-  function testAPI() {
-      console.log('Welcome!  Fetching your information.... ');
-      FB.api('/me', function(response) {
-        console.log('Successful login for: ' + response.name);
-        //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
-      });
   }
