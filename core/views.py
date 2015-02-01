@@ -58,8 +58,8 @@ def twtauthenticated(request):
         key=settings.CONSUMER_KEY, secret=settings.CONSUMER_SECRET)
 
     token = oauth.Token(
-        request.session['request_token']['oauth_token'],
-        request.session['request_token']['oauth_token_secret'])
+        request.session['twitter_token']['oauth_token'],
+        request.session['twitter_token']['oauth_token_secret'])
     client = oauth.Clien(consumer, token)
 
     resp, content = client.request(access_token_url, 'GET')
