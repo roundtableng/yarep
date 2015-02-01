@@ -240,13 +240,21 @@ img{max-width:100%;}
 .account i {
     font-style: normal;
 }
-button.fb {
-    background: #3B5998;
+button.fb, button.tt, button.gp {
     color: #ffffff;
     border-style: none;
     padding: 9px 50px 9px 10px;
     float: left;
     font-size: 1.1em;
+}
+button.fb {
+    background: #3B5998;
+}
+button.tt {
+    background: #45B0E3;
+}
+button.gp {
+    background: #DE4C34;
 }
 .span {
     margin-top: 10.4%;
