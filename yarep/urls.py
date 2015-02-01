@@ -9,7 +9,9 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^fblogin/$', 'core.views.fblogin', name="home"),
+    url(r'^fblogin/$', 'core.views.fblogin', name="fblogin"),
+    url(r'^profile/$', TemplateView.as_view(
+        template_name='core/profile.html'), name="profile"),
     url(r'^$', TemplateView.as_view(
         template_name='core/home.html'), name="home"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

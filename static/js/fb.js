@@ -90,7 +90,11 @@
               'email': email,
               'csrfmiddlewaretoken': csrf_token
       }, function(data){
-          console.log(data);
+          if (data == "Ok"){
+              console.log("logged in!");
+          } else {
+              console.error("not logged in");
+          }
       });
     });
   }
