@@ -2,6 +2,9 @@ import oauth2 as oauth
 import cgi
 import logging
 import os
+import httplib
+
+httplib.HTTPConnection.debuglevel = 1
 
 
 from django.http import HttpResponse, HttpResponseRedirect
@@ -67,12 +70,14 @@ def twtlogin(request):
 
 def twtauthenticated(request):
     logging.info("content: {}".format(request.GET))
+    verifier = request.GET.get('oauth_verifier')
     consumer = oauth.Consumer(
         key=settings.CONSUMER_KEY, secret=settings.CONSUMER_SECRET)
 
     token = oauth.Token(
         request.session['twitter_token']['oauth_token'],
         request.session['twitter_token']['oauth_token_secret'])
+    token.set_verifier(verifier)
     client = oauth.Client(consumer, token)
 
     resp, content = client.request(access_token_url, 'GET')
