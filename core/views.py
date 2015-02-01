@@ -15,7 +15,8 @@ def fblogin(request):
             try:
                 user = User.objects.get(username=email, password=pwd)
             except User.DoesNotExist:
-                user = User.objects.create_user(email, email)
+                user = User.objects.create_user(
+                    email, email=email, password=pwd)
                 user.first_name = name
                 user.save()
             usr = authenticate(username=email, password=pwd)
