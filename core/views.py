@@ -60,7 +60,7 @@ def twtauthenticated(request):
     token = oauth.Token(
         request.session['twitter_token']['oauth_token'],
         request.session['twitter_token']['oauth_token_secret'])
-    client = oauth.Clien(consumer, token)
+    client = oauth.Client(consumer, token)
 
     resp, content = client.request(access_token_url, 'GET')
     if resp['status'] != '200':
