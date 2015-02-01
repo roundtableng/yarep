@@ -1,5 +1,8 @@
 import oauth2 as oauth
 import cgi
+import logging
+import os
+
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
@@ -12,6 +15,14 @@ from core.forms import RegistrationForm
 request_token_url = 'https://twitter.com/oauth/request_token'
 authenticate_url = 'https://twitter.com/oauth/authenticate'
 access_token_url = 'https://twitter.com/oauth/access_token'
+
+LOGFILE = os.path.join(settings.BASE_DIR, 'log.log')
+#LOGFILE = 'log.log'
+
+logging.basicConfig(
+    filename=LOGFILE,
+    format='[%(asctime)s] %(message)s',
+    level=logging.DEBUG)
 
 
 def fblogin(request):
@@ -42,6 +53,7 @@ def twtlogin(request):
     # Request token url
 
     resp, content = client.request(request_token_url, "GET")
+    logging.info("content: {}".format(content))
     if resp['status'] != '200':
         return HttpResponse('crap')
     request.session['twitter_token'] = dict(cgi.parse_qsl(content))
@@ -54,6 +66,7 @@ def twtlogin(request):
 
 
 def twtauthenticated(request):
+    logging.info("content: {}".format(request.GET))
     consumer = oauth.Consumer(
         key=settings.CONSUMER_KEY, secret=settings.CONSUMER_SECRET)
 
