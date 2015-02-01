@@ -64,7 +64,8 @@ def twtauthenticated(request):
 
     resp, content = client.request(access_token_url, 'GET')
     if resp['status'] != '200':
-        return HttpResponse('Invalid response from Twitter')
+        return HttpResponse(content + str(resp))
+        #return HttpResponse('Invalid response from Twitter')
     access_token = dict(cgi.parse_qsl(content))
 
     name = access_token['screen_name']
