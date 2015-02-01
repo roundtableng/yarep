@@ -26,10 +26,12 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      testAPI();
+      //testAPI();
+      loginToApp();
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       console.log('Logged into fb but not app: ' + response.name);
+      login();
       //document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
     } else {
       // The person is not logged into Facebook, so we're not sure if
@@ -78,6 +80,20 @@
 
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
+  function loginToApp() {
+      FB.api('/me', function(response) {
+          var name = response.name;
+          var email = response.email;
+          var csrf_token = $("[name=csrfmiddlewaretoken]").val();
+          $.post('/fblogin/', {
+              'name': name,
+              'email': email,
+              'csrf_token': csrf_token
+      }, function(data){
+          console.log(data);
+      });
+    });
+  }
   function testAPI() {
       console.log('Welcome!  Fetching your information.... ');
       FB.api('/me', function(response) {

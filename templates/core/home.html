@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 
 {% load static from staticfiles %}
-{% block fb %}
-<script type="text/javascript" src="{% static 'js/fb.js' %}"></script>
-{% endblock fb %}
 
 {% block extra-js %}
 {% endblock extra-js %}
@@ -17,7 +14,7 @@
     <!-- start-contact-form --> 
                     <div class="contact-form">
                     <!-- start-form -->
-                        <form class="contact_form" action="#" method="post" name="contact_form">
+                    <form class="contact_form" action="#" method="post" name="contact_form" id="contact_form">{% csrf_token %}
                             <h1>Login Into Your Account</h1>
                             <ul>
                                 <li>
@@ -41,7 +38,7 @@
                     <!-- start-account -->
                     <div class="account">
                         <h2><a href="#">Join the roundtable!</a></h2>
-                        <div class="span"><a href="#" onclick="checkLoginState();"><img src="{% static 'img/facebook.png' %}" alt=""/><i>Sign In with Facebook</i><div class="clear"></div></a></div>    
+                        <div class="span"><a href="#"><img src="{% static 'img/facebook.png' %}" alt=""/><button class="fb" onclick="checkLoginState();">Sign In with Facebook</button><div class="clear"></div></a></div>    
                         <div class="span1"><a href="#"><img src="{% static 'img/twitter.png' %}" alt=""/><i>Sign In with Twitter</i><div class="clear"></div></a></div>
                         <div class="span2"><a href="#"><img src="{% static 'img/gplus.png' %}" alt=""/><i>Sign In with Google+</i><div class="clear"></div></a></div>
                     </div>  
@@ -52,3 +49,6 @@
                 </div>
   </section>
 {% endblock middle %}
+{% block fb %}
+<script type="text/javascript" src="{% static 'js/fb.js' %}"></script>
+{% endblock fb %}
