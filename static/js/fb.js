@@ -66,7 +66,13 @@
 
   // Called after login
   function loginStatusCallback(response) {
-      console.log(response);
+      if (response.status === 'connected'){
+          loginToApp();
+      } else if (response.status === 'not_authorized'){
+          alert('Your login was unsuccessful. Try again or use some other method of login!');
+      } else {
+          alert('Your login was unsuccessful. Try again or use some other method of login!');
+      }
   }
 
   // Load the SDK asynchronously
@@ -91,9 +97,9 @@
               'csrfmiddlewaretoken': csrf_token
       }, function(data){
           if (data == "Ok"){
-              console.log("logged in!");
+              location.href = "/profile/";
           } else {
-              console.error("not logged in");
+              alert("Could not log you in. Please try again later.");
           }
       });
     });
