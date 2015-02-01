@@ -11,7 +11,7 @@ def fblogin(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             name = form.cleaned_data['name']
-            pwd = form.cleaned_data['pwd']
+            pwd = form.cleaned_data['pwd'][:100]
             try:
                 user = User.objects.get(username=email, password=pwd)
             except User.DoesNotExist:
