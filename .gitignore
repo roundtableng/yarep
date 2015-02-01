@@ -59,3 +59,4 @@ target/
 # temp files
 *~
 .DS_Store
+fabfile.py
