@@ -10,6 +10,7 @@ admin.autodiscover()
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^fblogin/$', 'core.views.fblogin', name="fblogin"),
+    url(r'^facebook/$', 'core.views.fbauthenticated', name="fbauth"),
     url(r'^twtlogin/$', 'core.views.twtlogin', name="twtlogin"),
     url(r'^twitter/$', 'core.views.twtauthenticated', name="twtauth"),
     url(r'gplogin/$', 'core.views.gplogin', name='gplogin'),

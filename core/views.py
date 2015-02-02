@@ -14,7 +14,7 @@ from django.contrib.auth import login, authenticate
 from django.conf import settings
 from django.shortcuts import redirect
 
-from core.forms import RegistrationForm
+#from core.forms import RegistrationForm
 
 request_token_url = 'https://twitter.com/oauth/request_token'
 authenticate_url = 'https://twitter.com/oauth/authenticate'
