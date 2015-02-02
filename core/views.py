@@ -72,14 +72,27 @@ def fbauthenticated(request):
         }
     resp = urllib.urlopen(token_url + urllib.urlencode(params))
     data = cgi.parse_qs(resp.read())
-    logging.info(data)
     access_token = data['access_token'][-1]
 
     #profile
     params = urllib.urlencode(dict(access_token=access_token))
     profile = json.load(urllib.urlopen(
         'https://graph.facebook.com/me?' + params))
-    logging.info(profile)
+    name = profile['name']
+    email = profile['email']
+    pwd = profile['access_token']
+    try:
+        user = User.objects.get(username=email)
+        user.set_password(pwd)
+        user.save()
+    except User.DoesNotExist:
+        user = User.objects.create_user(
+            email, email=email, password=pwd)
+        user.first_name = name
+        user.save()
+    usr = authenticate(username=email, password=pwd)
+    login(request, usr)
+    return redirect('profile')
 
 
 def twtlogin(request):
