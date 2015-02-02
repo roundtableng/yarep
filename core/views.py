@@ -76,7 +76,7 @@ def fbauthenticated(request):
     access_token = data['access_token'][-1]
 
     #profile
-    params = urllib.urlopen(dict(access_token=access_token))
+    params = urllib.urlencode(dict(access_token=access_token))
     profile = json.load(urllib.urlopen(
         'https://graph.facebook.com/me?' + params))
     logging.info(profile)
