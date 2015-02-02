@@ -99,3 +99,7 @@ STATICFILES_FINDERS = (
 # Twitter tokens
 CONSUMER_KEY = 'MDv9nlSEopUjHWSXe2Q0xfzst'
 CONSUMER_SECRET = 'Z23pEZyyZ7QnKvqoBTkJ5tEz2KH7y28VrRUgaFCAXodvVKGVcL'
+
+# Gplus tokens
+GPLUS_CLIENT_KEY = '35780435620-9jqgsgvbk5cg062hqj1c5bmqqd214lbt.apps.googleusercontent.com'
+GPLUS_CLIENT_SECRET = '0PncxUjd408_yGg3U8kPc1nx'

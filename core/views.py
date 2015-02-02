@@ -2,9 +2,10 @@ import oauth2 as oauth
 import cgi
 import logging
 import os
-import httplib
+import httplib2
+import urllib
+import json
 
-httplib.HTTPConnection.debuglevel = 1
 
 
 from django.http import HttpResponse, HttpResponseRedirect
@@ -20,7 +21,6 @@ authenticate_url = 'https://twitter.com/oauth/authenticate'
 access_token_url = 'https://twitter.com/oauth/access_token'
 
 LOGFILE = os.path.join(settings.BASE_DIR, 'log.log')
-#LOGFILE = 'log.log'
 
 logging.basicConfig(
     filename=LOGFILE,
@@ -37,6 +37,9 @@ def fblogin(request):
             pwd = form.cleaned_data['pwd'][:100]
             try:
                 user = User.objects.get(username=email)
+                # need to reset password or it won't authenticate
+                user.set_password(pwd)
+                user.save()
             except User.DoesNotExist:
                 user = User.objects.create_user(
                     email, email=email, password=pwd)
@@ -82,7 +85,7 @@ def twtauthenticated(request):
 
     resp, content = client.request(access_token_url, 'GET')
     if resp['status'] != '200':
-        return HttpResponse(content + str(resp))
+        return HttpResponse('Could not log you in. Please go back')
         #return HttpResponse('Invalid response from Twitter')
     access_token = dict(cgi.parse_qsl(content))
 
@@ -91,6 +94,9 @@ def twtauthenticated(request):
     pwd = access_token['oauth_token']
     try:
         user = User.objects.get(username=email)
+        # need to reset password or it won't authenticate
+        user.set_password(pwd)
+        user.save()
     except User.DoesNotExist:
         user = User.objects.create_user(
             email, email=email, password=pwd)
@@ -99,3 +105,71 @@ def twtauthenticated(request):
     usr = authenticate(username=email, password=pwd)
     login(request, usr)
     return redirect('profile')
+
+
+def gplogin(request):
+    redirect_uri = request.build_absolute_uri('/gplus')
+    scope = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+    params = {
+        'token_url': 'https://accounts.google.com/o/oauth2/auth',
+        'client_id': settings.GPLUS_CLIENT_KEY,
+        'scope': scope,
+        'redirect_uri': redirect_uri
+    }
+    url = '{token_url}?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}'.format(**params)
+    print url
+    return redirect(url)
+
+
+def gpauthenticated(request):
+    parser = httplib2.Http()
+    if 'error' in request.GET or 'code' not in request.GET:
+        return redirect('home')
+    access_uri = 'https://accounts.google.com/o/oauth2/token'
+    #profile_uri = 'https://www.googleapis.com/oauth2/v1/userinfo?'
+    profile_uri = 'https://www.googleapis.com/plus/v1/people/me'
+    redirect_uri = request.build_absolute_uri('/gplus')
+    params = urllib.urlencode({
+        'code': request.GET['code'],
+        'redirect_uri': redirect_uri,
+        'client_id': settings.GPLUS_CLIENT_KEY,
+        'client_secret': settings.GPLUS_CLIENT_SECRET,
+        'grant_type': 'authorization_code'})
+    headers = {'content-type': 'application/x-www-form-urlencoded'}
+
+    resp, content = parser.request(
+        access_uri, method='POST', body=params, headers=headers)
+    if resp['status'] != '200':
+        return HttpResponse(
+            'Google could not log you in, please try again later')
+    access_token = json.loads(content)
+
+    resp, content = parser.request(
+        '{uri}?access_token={token}'.format(
+            uri=profile_uri, token=access_token['access_token']))
+    if resp['status'] != '200':
+        return HttpResponse(
+            'Google could not log you in, please try again later')
+    profile = json.loads(content)
+    name = profile['displayName']
+    emails = profile['emails']
+    if emails:
+        email = emails[0]['value']
+    else:
+        email = '{name}@gplus.com'.format(name=name)
+    pwd = access_token['access_token']
+
+    try:
+        user = User.objects.get(username=email)
+        # need to reset password or it won't authenticate
+        user.set_password(pwd)
+        user.save()
+    except User.DoesNotExist:
+        user = User.objects.create_user(
+            email, email=email, password=pwd)
+        user.first_name = name
+        user.save()
+    usr = authenticate(username=email, password=pwd)
+    login(request, usr)
+
+    return redirect('/profile')

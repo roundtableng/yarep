@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^fblogin/$', 'core.views.fblogin', name="fblogin"),
     url(r'^twtlogin/$', 'core.views.twtlogin', name="twtlogin"),
     url(r'^twitter/$', 'core.views.twtauthenticated', name="twtauth"),
+    url(r'gplogin/$', 'core.views.gplogin', name='gplogin'),
+    url(r'gplus/$', 'core.views.gpauthenticated', name='gpauth'),
     url(r'^profile/$', TemplateView.as_view(
         template_name='core/profile.html'), name="profile"),
     url(r'^$', TemplateView.as_view(
