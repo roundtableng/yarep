@@ -54,7 +54,8 @@ logging.basicConfig(
 def fblogin(request):
     params = {
         'redirect_uri': request.build_absolute_uri('/facebook'),
-        'client_id': settings.FB_CLIENT_ID
+        'client_id': settings.FB_CLIENT_ID,
+        'scope': 'public_profile,email',
     }
     base_url = 'https://graph.facebook.com/oauth/authorize?'
     return redirect(base_url + urllib.urlencode(params))
