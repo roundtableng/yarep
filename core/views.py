@@ -28,27 +28,58 @@ logging.basicConfig(
     level=logging.DEBUG)
 
 
+#def fblogin(request):
+#    if request.method == 'POST':
+#        form = RegistrationForm(request.POST)
+#        if form.is_valid():
+#            email = form.cleaned_data['email']
+#            name = form.cleaned_data['name']
+#            pwd = form.cleaned_data['pwd'][:100]
+#            try:
+#                user = User.objects.get(username=email)
+#                # need to reset password or it won't authenticate
+#                user.set_password(pwd)
+#                user.save()
+#            except User.DoesNotExist:
+#                user = User.objects.create_user(
+#                    email, email=email, password=pwd)
+#                user.first_name = name
+#                user.save()
+#            usr = authenticate(username=email, password=pwd)
+#            login(request, usr)
+#            return HttpResponse('Ok')
+#    return HttpResponse('Bad')
+
+
 def fblogin(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            name = form.cleaned_data['name']
-            pwd = form.cleaned_data['pwd'][:100]
-            try:
-                user = User.objects.get(username=email)
-                # need to reset password or it won't authenticate
-                user.set_password(pwd)
-                user.save()
-            except User.DoesNotExist:
-                user = User.objects.create_user(
-                    email, email=email, password=pwd)
-                user.first_name = name
-                user.save()
-            usr = authenticate(username=email, password=pwd)
-            login(request, usr)
-            return HttpResponse('Ok')
-    return HttpResponse('Bad')
+    params = {
+        'redirect_uri': request.build_absolute_uri('/facebook'),
+        'client_id': settings.FB_CLIENT_ID
+    }
+    base_url = 'https://graph.facebook.com/oauth/authorize?'
+    return redirect(base_url + urllib.urlencode(params))
+
+
+def fbauthenticated(request):
+    token_url = 'https://graph.facebook.com/oauth/access_token?'
+    code = request.GET.get('code')
+    if code:
+        params = {
+            'client_id': settings.FB_CLIENT_ID,
+            'redirect_uri': request.build_absolute_uri('/facebook'),
+            'code': code,
+            'client_secret': settings.FB_APP_SECRET,
+        }
+    resp = urllib.urlopen(token_url + urllib.urlencode(params))
+    data = cgi.parse_qs(resp.read())
+    logging.info(data)
+    access_token = data['access_token'][-1]
+
+    #profile
+    params = urllib.urlopen(dict(access_token=access_token))
+    profile = json.load(urllib.urlopen(
+        'https://graph.facebook.com/me?' + params))
+    logging.info(profile)
 
 
 def twtlogin(request):
