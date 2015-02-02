@@ -80,7 +80,7 @@ def fbauthenticated(request):
         'https://graph.facebook.com/me?' + params))
     name = profile['name']
     email = profile['email']
-    pwd = profile['access_token']
+    pwd = profile['id']
     try:
         user = User.objects.get(username=email)
         user.set_password(pwd)
