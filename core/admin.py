@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from core.models import Account
+
+
+class AccountAdmin(admin.ModelAdmin):
+    list_display = ('user', 'lga')
+
+
+admin.site.register(Account, AccountAdmin)
