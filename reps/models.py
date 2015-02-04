@@ -36,6 +36,14 @@ class LGA(models.Model):
     def __unicode__(self):
         return self.name
 
+    @property
+    def representative(self):
+        return self.constituency.representative_set.all()[0]
+
+    @property
+    def senator(self):
+        return self.district.senator_set.all()[0]
+
 
 class Representative(models.Model):
     name = models.CharField(max_length=200)

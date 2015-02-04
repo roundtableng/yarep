@@ -5,12 +5,45 @@
 {% block extra-js %}
 {% endblock extra-js %}
 
+{% block bodyclass %}{% endblock bodyclass %}
 {% block middle %}
   <!-- Banner -->
   <section>
-      <h2>Welcome {{ user.username }}, {{ user.first_name }} </h2>
+      <div class="row">
+          <div></div>
+                        <section class="4u 6u(medium) 12u$(small)">
+                            <h3>You: {{ user.username }}</h3>
+                            <h5>Joined {{ user.date_joined }}</h5>
+                            <h5>Local Govt. {{ user.account.lga }} in {{ user.account.lga.state }}</h5>
+                            House of Reps member
+                            <ul>
+                                <li>Name: {{ user.account.lga.representative }}</li>
+                                <li>Constituency: {{ user.account.lga.constituency }}</li>
+                                <li>Phone:</li>
+                                <li>Email: </li>
+                                <li>Twitter: </li>
+                                <li>Facebook: </li>
+                            </ul>
+                            <br />
+                            Senator
+                            <ol>
+                                <li>Name: {{ user.account.lga.senator }}</li>
+                                <li>District: {{ user.account.lga.district }}</li>
+                                <li>Phone:</li>
+                                <li>Email: </li>
+                                <li>Twitter: </li>
+                                <li>Facebook: </li>
+                            </ol>
+                        </section>
+                        <section class="4u 6u$(medium) 12u$(small)">
+                            <h3>Conversations</h3>
+                            <p>There are no conversations yet.</p>
+                            <ul class="alt">
+                            </ul>
+                        </section>
+          <div></div>
+      </div>
   </section>
 {% endblock middle %}
 {% block fb %}
-<script type="text/javascript" src="{% static 'js/fb.js' %}"></script>
 {% endblock fb %}
