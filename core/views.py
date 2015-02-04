@@ -6,15 +6,16 @@ import httplib2
 import urllib
 import json
 
-
-
+from django.core.serializers import serialize
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.conf import settings
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 
-#from core.forms import RegistrationForm
+from reps.models import State, LGA
+from core.models import Account
 
 request_token_url = 'https://twitter.com/oauth/request_token'
 authenticate_url = 'https://twitter.com/oauth/authenticate'
@@ -28,27 +29,17 @@ logging.basicConfig(
     level=logging.DEBUG)
 
 
-#def fblogin(request):
-#    if request.method == 'POST':
-#        form = RegistrationForm(request.POST)
-#        if form.is_valid():
-#            email = form.cleaned_data['email']
-#            name = form.cleaned_data['name']
-#            pwd = form.cleaned_data['pwd'][:100]
-#            try:
-#                user = User.objects.get(username=email)
-#                # need to reset password or it won't authenticate
-#                user.set_password(pwd)
-#                user.save()
-#            except User.DoesNotExist:
-#                user = User.objects.create_user(
-#                    email, email=email, password=pwd)
-#                user.first_name = name
-#                user.save()
-#            usr = authenticate(username=email, password=pwd)
-#            login(request, usr)
-#            return HttpResponse('Ok')
-#    return HttpResponse('Bad')
+def login_user(request, name, email, password):
+    try:
+        user = User.objects.get(username=email)
+        user.set_password(password)
+        user.save()
+    except User.DoesNotExist:
+        user = User.objects.create_user(email, email=email, password=password)
+        user.first_name = name
+        user.save()
+    usr = authenticate(username=email, password=password)
+    login(request, usr)
 
 
 def fblogin(request):
@@ -79,21 +70,7 @@ def fbauthenticated(request):
     params = urllib.urlencode(dict(access_token=access_token))
     profile = json.load(urllib.urlopen(
         'https://graph.facebook.com/me?' + params))
-    logging.info(profile)
-    name = profile['name']
-    email = profile['email']
-    pwd = profile['id']
-    try:
-        user = User.objects.get(username=email)
-        user.set_password(pwd)
-        user.save()
-    except User.DoesNotExist:
-        user = User.objects.create_user(
-            email, email=email, password=pwd)
-        user.first_name = name
-        user.save()
-    usr = authenticate(username=email, password=pwd)
-    login(request, usr)
+    login_user(request, profile['name'], profile['email'], profile['id'])
     return redirect('profile')
 
 
@@ -138,18 +115,7 @@ def twtauthenticated(request):
     name = access_token['screen_name']
     email = '{}@twitter.com'.format(name)
     pwd = access_token['oauth_token']
-    try:
-        user = User.objects.get(username=email)
-        # need to reset password or it won't authenticate
-        user.set_password(pwd)
-        user.save()
-    except User.DoesNotExist:
-        user = User.objects.create_user(
-            email, email=email, password=pwd)
-        user.first_name = name
-        user.save()
-    usr = authenticate(username=email, password=pwd)
-    login(request, usr)
+    login_user(request, name, email, pwd)
     return redirect('profile')
 
 
@@ -163,7 +129,6 @@ def gplogin(request):
         'redirect_uri': redirect_uri
     }
     url = '{token_url}?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}'.format(**params)
-    print url
     return redirect(url)
 
 
@@ -172,7 +137,6 @@ def gpauthenticated(request):
     if 'error' in request.GET or 'code' not in request.GET:
         return redirect('home')
     access_uri = 'https://accounts.google.com/o/oauth2/token'
-    #profile_uri = 'https://www.googleapis.com/oauth2/v1/userinfo?'
     profile_uri = 'https://www.googleapis.com/plus/v1/people/me'
     redirect_uri = request.build_absolute_uri('/gplus')
     params = urllib.urlencode({
@@ -205,17 +169,35 @@ def gpauthenticated(request):
         email = '{name}@gplus.com'.format(name=name)
     pwd = access_token['access_token']
 
-    try:
-        user = User.objects.get(username=email)
-        # need to reset password or it won't authenticate
-        user.set_password(pwd)
-        user.save()
-    except User.DoesNotExist:
-        user = User.objects.create_user(
-            email, email=email, password=pwd)
-        user.first_name = name
-        user.save()
-    usr = authenticate(username=email, password=pwd)
-    login(request, usr)
-
+    login_user(request, name, email, pwd)
     return redirect('/profile')
+
+
+@login_required
+def profile(request):
+    if not request.user.account.lga:
+        return redirect('select_lga')
+    return render(request, 'core/profile.html')
+
+
+def select_lga(request):
+    if request.method == 'POST':
+        lga_id = request.POST.get('lga')
+        lga = LGA.objects.get(pk=lga_id)
+        account, _ = Account.objects.get_or_create(user=request.user)
+        account.lga = lga
+        account.save()
+        return redirect('profile')
+    return render(
+        request,
+        'core/select_lga.html',
+        {
+            'states': State.objects.all()
+        })
+
+
+def get_lgas(request):
+    state_id = request.GET.get('state')
+    state = State.objects.get(pk=state_id)
+    json_data = serialize('json', state.lga_set.all())
+    return HttpResponse(json_data)

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% load static from staticfiles %}
+
+{% block extra-js %}
+<script type="text/javascript">
+$(function(){
+  $('#id_state').change(function(){
+      var state_id = $("#id_state option:selected").val();
+      console.log(state_id);
+      $.getJSON("/get_lgas?state=" + state_id, function(data) {
+          $('#id_lga').html('<option value="">SELECT LGA</option>');
+          $.each(data, function(key, val){
+              console.log(val);
+              $('#id_lga').append('<option value="' + val.pk + '">' + val.fields.name + '</option>');
+              });
+          });
+      });
+});
+</script>
+{% endblock extra-js %}
+
+{% block middle %}
+  <!-- Banner -->
+  <section id="banner">
+      <h2>Welcome {{ user.username }}, {{ user.first_name }} </h2>
+    <div class="wrap">
+    <!-- start-contact-form --> 
+                    <div class="contact-form">
+                    <!-- start-form -->
+                    <form class="lga_form" action="#" method="post" name="lga_form" id="lga_form">{% csrf_token %}
+                        <h3><strong>One more thing!</strong><br /> We need to know your local government area</h3>
+                            <ul>
+                                <li>
+                                    <select name="state" id="id_state">
+                                        <option value="">SELECT STATE</option>
+                                        {% for state in states %}
+                                          <option value="{{state.pk}}">{{state}}</option>
+                                        {% endfor %} 
+                                    </select>
+                            <h3>First select your State of residence</h3>
+                                    <span class="form_hint">Select your state of residence</span>
+                                </li>
+                                <li>
+                                    <select name="lga" id="id_lga">
+                                        <option val="">SELECT LGA</option>
+                                    </select>
+                            <h3>Then select your Local Govt Area</h3>
+                                    <span class="form_hint">Select your LGA</span>
+                                </li>
+                             </ul>
+                                <input type="submit" name="complete" value="Complete"/>
+                                <div class="clear"></div>   
+                        </form>
+                    <!-- end-form -->
+                    <div class="clear"></div>   
+</div>
+  </section>
+{% endblock middle %}
