@@ -37,8 +37,12 @@ img{max-width:100%;}
     background-position: center;
     background-size: cover;
 }*/
-#banner .account h2 {
+.account > h2 {
     font-size: 1.3em;
+}
+.wrap h3 {
+    font-size: 1.3em;
+    line-height: 1.2em;
 }
 .wrap{
     width: 50%;

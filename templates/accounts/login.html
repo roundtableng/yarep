@@ -1,15 +1,13 @@
+
 {% extends "base.html" %}
 
 {% load static from staticfiles %}
 
-{% block extra-js %}
-{% endblock extra-js %}
-
+<!-- No styling for body tab -->
+{% block bodyclass %}{% endblock bodyclass %}
 {% block middle %}
   <!-- Banner -->
-  <section id="banner">
-    <h2>Our destinies cannot be left in the hands of "leaders"!</h2>
-    <p>... Let's discuss!</p>
+  <section id="main" class="wrapper">
     <div class="wrap">
     <!-- start-contact-form --> 
                     <div class="contact-form">

@@ -51,7 +51,7 @@
       {% endblock head %}
       {% block extra-head %}{% endblock extra-head %}
     </head>
-    <body class="landing">
+    <body {% block bodyclass %}class="landing"{% endblock bodyclass %}>
       {% block body %}
 
         <!-- Header -->
