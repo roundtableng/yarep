@@ -16,7 +16,7 @@
                             <h5>Joined {{ user.date_joined }}</h5>
                             <h5>Local Govt. {{ user.account.lga }} in {{ user.account.lga.state }}</h5>
                             House of Reps member
-                            <ul>
+                            <ul class="alt">
                                 <li>Name: {{ user.account.lga.representative }}</li>
                                 <li>Constituency: {{ user.account.lga.constituency }}</li>
                                 <li>Phone:</li>
@@ -26,14 +26,14 @@
                             </ul>
                             <br />
                             Senator
-                            <ol>
+                            <ul class="alt">
                                 <li>Name: {{ user.account.lga.senator }}</li>
                                 <li>District: {{ user.account.lga.district }}</li>
                                 <li>Phone:</li>
                                 <li>Email: </li>
                                 <li>Twitter: </li>
                                 <li>Facebook: </li>
-                            </ol>
+                            </ul>
                         </section>
                         <section class="4u 6u$(medium) 12u$(small)">
                             <h3>Conversations</h3>
