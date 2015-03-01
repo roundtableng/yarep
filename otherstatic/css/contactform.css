@@ -79,10 +79,21 @@ img{max-width:100%;}
     position:relative;
 } 
     /* form element visual styles */
+    .normal {
+        border: 1px solid #DDDDDD;
+    }
+    .error {
+        border: 1px solid #ff0000;
+    }
+    .errorlist {
+        border: 1px solid #ff0000;
+        color: #ff0000;
+        font-size: 14px !important;
+        background: #ffc;
+    }
     .contact_form li{ 
         float: left;
         outline: none;
-        border: 1px solid #DDDDDD;
         font-size: 1.3em;
         color: #B6B6B6;
         width: 78.5%;

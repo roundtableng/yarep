@@ -3,6 +3,12 @@
 {% load static from staticfiles %}
 
 {% block extra-js %}
+<script type="text/javascript">
+$(function(){
+        $('#id_username').attr('placeholder', 'i@roundtableng.org');
+        $('#id_password').attr('placeholder', 'password');
+});
+</script>
 {% endblock extra-js %}
 
 {% block middle %}
@@ -14,16 +20,19 @@
     <!-- start-contact-form --> 
                     <div class="contact-form">
                     <!-- start-form -->
-                    <form class="contact_form" action="#" method="post" name="contact_form" id="contact_form">{% csrf_token %}
+                    {% if form.non_field_errors %} 
+                    {{ form.non_field_errors }}
+                    {% endif %}
+                    <form class="contact_form" action="." method="post" name="contact_form" id="contact_form">{% csrf_token %}
                             <h1>Login Into Your Account</h1>
                             <ul>
-                                <li>
-                                    <input type="email" class="textbox1" name="email" placeholder="i@roundtableng.org" required />
+                                <li class="{% if form.username.errors %}error{% else %}normal{% endif %}">
+                                    {{ form.username }}
                                     <span class="form_hint">Enter a valid email</span>
                                     <p><img src="{% static 'img/contact.png' %}" alt=""></p>
                                 </li>
-                                <li>
-                                    <input type="password" name="website" class="textbox2" placeholder="password">
+                                <li class="{% if form.password.errors %}error{% else %}normal{% endif %}">
+                                    {{ form.password }}
                                     <p><img src="{% static 'img/lock.png' %}" alt=""></p>
                                 </li>
                              </ul>

@@ -13,9 +13,11 @@ from django.contrib.auth import login, authenticate
 from django.conf import settings
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from reps.models import State, LGA
 from core.models import Account
+from core.forms import LoginForm
 
 request_token_url = 'https://twitter.com/oauth/request_token'
 authenticate_url = 'https://twitter.com/oauth/authenticate'
@@ -201,3 +203,16 @@ def get_lgas(request):
     state = State.objects.get(pk=state_id)
     json_data = serialize('json', state.lga_set.all())
     return HttpResponse(json_data)
+
+
+def home(request):
+    if request.method == 'POST':
+        #import pdb;pdb.set_trace()
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = form.cleaned_data['user']
+            login(request, user)
+            return redirect('profile')
+    else:
+        form = LoginForm()
+    return render(request, 'core/home.html', {'form': form})
