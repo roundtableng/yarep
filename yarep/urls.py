@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^gplogin/$', 'core.views.gplogin', name='gplogin'),
     url(r'^gplus/$', 'core.views.gpauthenticated', name='gpauth'),
     url(r'^profile/$', 'core.views.profile', name='profile'),
+    url(r'^replist/$', 'core.views.replist', name='replist'),
     url(r'^lga/$', 'core.views.select_lga', name='select_lga'),
     url(r'^get_lgas/$', 'core.views.get_lgas', name='get_lgas'),
     url(r'^$', 'core.views.home', name='home'),

@@ -216,3 +216,7 @@ def home(request):
     else:
         form = LoginForm()
     return render(request, 'core/home.html', {'form': form})
+
+
+def replist(request):
+    return render(request, 'core/replist.html', {'lgas': LGA.objects.all()})
