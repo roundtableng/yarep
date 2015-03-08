@@ -48,14 +48,28 @@ class LGA(models.Model):
 class Representative(models.Model):
     name = models.CharField(max_length=200)
     constituency = models.ForeignKey('Constituency')
+    join_date = models.DateField(null=True, blank=True)
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def is_active(self):
+        if not self.join_date:
+            return False
+        return True
 
 
 class Senator(models.Model):
     name = models.CharField(max_length=200)
     district = models.ForeignKey('District')
+    join_date = models.DateField(null=True, blank=True)
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def is_active(self):
+        if not self.join_date:
+            return False
+        return True

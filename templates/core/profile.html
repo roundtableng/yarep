@@ -25,7 +25,7 @@
                             </ul>
                         </section>
                         <section class="4u 6u$(medium) 12u$(small)">
-                            House of Reps member
+                            Reps member: ({% if user.account.lga.representative.is_active %}Active{% else %}Pending{% endif %}</li>)
                             <ul>
                                 <li><strong>{{ user.account.lga.representative }}</strong></li>
                                 <li>Phone:</li>
@@ -33,7 +33,7 @@
                                 <li>Twitter: </li>
                                 <li>Facebook: </li>
                             </ul>
-                            Senator
+                            Senator: ({% if user.account.lga.senator.is_active %}Active{% else %}Pending{% endif %}</li>)
                             <ul>
                                 <li><strong>{{ user.account.lga.senator }}</strong></li>
                                 <li>Phone:</li>
