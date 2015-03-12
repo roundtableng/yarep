@@ -1,4 +1,4 @@
-#Django==1.6.5
-#South==0.8.4
-#-e git+https://github.com/simplegeo/python-oauth2.git
+Django==1.6.5
+South==0.8.4
+-e git+https://github.com/simplegeo/python-oauth2.git
 psycopg2==2.5.2
