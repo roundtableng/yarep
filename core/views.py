@@ -5,19 +5,21 @@ import os
 import httplib2
 import urllib
 import json
+from datetime import datetime
 
 from django.core.serializers import serialize
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.conf import settings
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from reps.models import State, LGA
 from core.models import Account
-from core.forms import LoginForm
+from core.forms import LoginForm, TopicForm, PostForm
+from pybb.models import Topic, Forum, Post
 
 request_token_url = 'https://twitter.com/oauth/request_token'
 authenticate_url = 'https://twitter.com/oauth/authenticate'
@@ -29,6 +31,14 @@ logging.basicConfig(
     filename=LOGFILE,
     format='[%(asctime)s] %(message)s',
     level=logging.DEBUG)
+
+
+def get_default_forum():
+    forums = Forum.objects.all()
+    if not forums:
+        raise NotImplementedError('You need to create a forum')
+    else:
+        return forums[0]
 
 
 def login_user(request, name, email, password):
@@ -179,7 +189,14 @@ def gpauthenticated(request):
 def profile(request):
     if not request.user.account.lga:
         return redirect('select_lga')
-    return render(request, 'core/profile.html')
+    forum = get_default_forum()
+    # Get topics of forum
+    topics = Topic.objects.filter(forum=forum)
+    return render(
+        request,
+        'core/profile.html',
+        {'topics': topics, 'forum_id': forum.pk}
+    )
 
 
 def select_lga(request):
@@ -220,3 +237,62 @@ def home(request):
 
 def replist(request):
     return render(request, 'core/replist.html', {'lgas': LGA.objects.all()})
+
+
+@login_required
+def new_topic(request):
+    now = datetime.now()
+    forum = get_default_forum()
+    if request.method == 'POST':
+        form = TopicForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            post = form.cleaned_data['post']
+            new_topic = Topic.objects.create(
+                name=name,
+                forum=forum,
+                created=now,
+                updated=now,
+                user=request.user)
+            Post.objects.create(
+                topic=new_topic,
+                user=request.user,
+                created=now,
+                updated=now,
+                body=post,
+                body_html=post,
+                body_text=post)
+            return redirect('profile')
+    else:
+        form = TopicForm()
+    return render(request, 'core/add_topic.html', {'form': form})
+
+
+@login_required
+def topic(request, topic_id):
+    now = datetime.now()
+    topic = get_object_or_404(Topic, pk=topic_id)
+    posts = Post.objects.filter(topic=topic)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.cleaned_data['post']
+            Post.objects.create(
+                topic=topic,
+                user=request.user,
+                created=now,
+                updated=now,
+                body=post,
+                body_html=post,
+                body_text=post)
+            return redirect('profile')
+    else:
+        form = PostForm()
+    return render(
+        request,
+        'core/topic.html',
+        {
+            'form': form,
+            'topic': topic,
+            'posts': posts
+        })

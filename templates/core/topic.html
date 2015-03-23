@@ -1,0 +1,58 @@
+{% extends 'core/profile.html' %}
+{% load static from staticfiles %}
+
+{% block pagetitle %}Topic: {{ topic.name }}{% endblock pagetitle %}
+
+{% block extra-js %}
+<script type="text/javascript">
+    $(function(){
+        $('#id_post').attr('class', 'form-control');
+    });
+        </script>
+{% endblock extra-js %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li><a href="{% url 'profile' %}">Conversations</a></li>
+    <li class="active">{{ topic.name }}</li>
+</ul>
+{% endblock breadcrumb %}
+
+{% block midpanel-heading %}
+  <h3 class="panel-title">{{ topic.name }}</h3>
+{% endblock midpanel-heading %}
+
+{% block midpanel-body %}
+<div class="messages">
+    {% for post in posts %}
+      <div class="item item-visible">
+          <div class="text">
+              <div class="heading">
+                  <strong>{{ post.user }}</strong>
+                  <span class="date">{{ post.created }}</span>
+              </div>
+              {{ post.body }}
+          </div>
+      </div>
+    {% endfor %}
+<form action="" class="form-horizontal" method="post">{% csrf_token %}
+<div class="form-group{% if form.post.errors %} has-error{% endif %}">
+    <!--label class="control-label col-md-2 col-xs-12">Post</label-->
+    <div class="col-md-12 col-xs-12">
+        {% if form.post.errors %}
+             <label class="control-label">{{ form.post.errors }}</label>
+        {% endif %}
+        {{ form.post }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-6">
+        <button class="btn btn-block btn-primary">Post</button>
+    </div>
+</div>
+</form>
+</div>
+{% endblock midpanel-body %}
+
+{% block midpanel-footer %}
+{% endblock midpanel-footer %}

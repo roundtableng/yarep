@@ -1,60 +1,72 @@
-{% extends "base.html" %}
-
+{% extends "core/base.html" %}
 {% load static from staticfiles %}
 
 {% block extra-js %}
-<script type="text/javascript">
-$(function(){
-        $('#id_username').attr('placeholder', 'i@roundtableng.org');
-        $('#id_password').attr('placeholder', 'password');
-});
-</script>
+        <script type="text/javascript">
+        $(function(){
+                $('#id_username').attr('placeholder', 'E-mail');
+                $('#id_username').attr('class', 'form-control');
+                $('#id_password').attr('placeholder', 'Password');
+                $('#id_password').attr('class', 'form-control');
+        });
+        </script>
 {% endblock extra-js %}
 
-{% block middle %}
-  <!-- Banner -->
-  <section id="banner">
-    <h2>Our destinies cannot be left in the hands of "leaders"!</h2>
-    <p>... Let's discuss!</p>
-    <div class="wrap">
-    <!-- start-contact-form --> 
-                    <div class="contact-form">
-                    <!-- start-form -->
-                    {% if form.non_field_errors %} 
-                    {{ form.non_field_errors }}
+{% block quote %}
+   <div class="blockquote">
+       <h4>"If there is no struggle there is no progress... Power concedes nothing without a demand. It never did and it never will.” 
+           <footer><cite>Frederick Douglass</cite></footer>
+       </h4>
+   </div>
+{% endblock %}
+
+                    {% block innerbody %}
+                    {% if form.non_field_errors %}
+                    <div class="form-group has-error">
+                        <label class="control-label">{{ form.non_field_errors }}</label>
+                    </div>
                     {% endif %}
-                    <form class="contact_form" action="." method="post" name="contact_form" id="contact_form">{% csrf_token %}
-                            <h1>Login Into Your Account</h1>
-                            <ul>
-                                <li class="{% if form.username.errors %}error{% else %}normal{% endif %}">
-                                    {{ form.username }}
-                                    <span class="form_hint">Enter a valid email</span>
-                                    <p><img src="{% static 'img/contact.png' %}" alt=""></p>
-                                </li>
-                                <li class="{% if form.password.errors %}error{% else %}normal{% endif %}">
-                                    {{ form.password }}
-                                    <p><img src="{% static 'img/lock.png' %}" alt=""></p>
-                                </li>
-                             </ul>
-                                <input type="submit" name="Sign In" value="Sign In"/>
-                                <div class="clear"></div>   
-                            <div class="forgot">
-                                <a href="#">forgot password?</a>
-                            </div>  
-                            <div class="clear"></div>   
-                        </form>
-                    <!-- end-form -->
-                    <!-- start-account -->
-                    <div class="account">
-                        <h3><a href="#">Join the roundtable!</a></h3>
-                        <div class="span"><a href="{% url 'fblogin' %}"><img src="{% static 'img/facebook.png' %}" alt=""/><button class="fb">Sign In with Facebook</button><div class="clear"></div></a></div>    
-                        <div class="span1"><a href="{% url 'twtlogin' %}"><img src="{% static 'img/twitter.png' %}" alt=""/><button class="tt">Sign In with Twitter</button><div class="clear"></div></a></div>
-                        <div class="span2"><a href="{% url 'gplogin' %}"><img src="{% static 'img/gplus.png' %}" alt=""/><button class="gp">Sign In with Google</button><div class="clear"></div></a></div>
-                    </div>  
-                    <!-- end-account -->
-                    <div class="clear"></div>   
-</div>
-<!-- end-contact-form -->
-                </div>
-  </section>
-{% endblock middle %}
+                    <div class="login-title"><strong>Log In</strong> to your account</div>
+                    <form action="" class="form-horizontal" method="post">{% csrf_token %}
+                    <div class="form-group{% if form.username.errors %} has-error{% endif %}">
+                        <div class="col-md-12">
+                            {% if form.username.errors %}
+                              <label class="control-label">{{ form.username.errors }}</label>
+                            {% endif %}
+                            {{ form.username }}
+                        </div>
+                    </div>
+                    <div class="form-group{% if form.password.errors %} has-error{% endif %}">
+                        <div class="col-md-12">
+                            {% if form.password.errors %}
+                              <label class="control-label">{{ form.password.errors }}</label>
+                            {% endif %}
+                            {{ form.password }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <a href="#" class="btn btn-link btn-block">Forgot your password?</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-block btn-primary">Log In</button>
+                        </div>
+                    </div>
+                    </form>
+                    <div class="login-or">OR</div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <a href="{% url 'twtlogin' %}"><button class="btn btn-info btn-block btn-twitter"><span class="fa fa-twitter"></span>Twitter</button></a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{% url 'fblogin' %}"><button class="btn btn-info btn-block btn-facebook"><span class="fa fa-facebook"></span> Facebook</button></a>
+                        </div>
+                        <div class="col-md-4">                            
+                            <a href="{% url 'gplogin' %}"><button class="btn btn-info btn-block btn-google"><span class="fa fa-google-plus"></span> Google</button></a>
+                        </div>
+                    </div>
+                    <div class="login-subtitle">
+                        Don't have an account yet? <a href="#">Create an account</a>
+                    </div>
+                    
+                    {% endblock innerbody %}

@@ -22,6 +22,8 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
+SITE_ID = 1
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -31,9 +33,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'core',
     'south',
     'reps',
+    'pybb',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -43,6 +47,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'pybb.middleware.PybbMiddleware',
 )
 
 ROOT_URLCONF = 'yarep.urls'
@@ -111,3 +116,20 @@ GPLUS_CLIENT_SECRET = '0PncxUjd408_yGg3U8kPc1nx'
 #FB tokens
 FB_CLIENT_ID = '1568273430125647'
 FB_APP_SECRET = '18507450d1e68212930f06eceed33388'
+
+SOUTH_MIGRATION_MODULES = {
+    'pybb': 'pybb.south_migrations',
+}
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    'pybb.context_processors.processor',
+)
+
+LOGIN_REDIRECT_URL = '/conversations/'

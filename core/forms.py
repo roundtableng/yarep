@@ -26,3 +26,12 @@ class LoginForm(forms.Form):
                     Please contact the administrator')
             self.cleaned_data['user'] = user
             return self.cleaned_data
+
+
+class TopicForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    post = forms.CharField(widget=forms.Textarea, max_length=200)
+
+
+class PostForm(forms.Form):
+    post = forms.CharField(widget=forms.Textarea(attrs={'rows': '5'}), max_length=200)

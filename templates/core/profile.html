@@ -1,50 +1,110 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% load static from staticfiles %}
 
-{% block extra-js %}
-{% endblock extra-js %}
 
-{% block bodyclass %}{% endblock bodyclass %}
-{% block middle %}
-  <!-- Banner -->
-  <section>
-      <div class="row">
-          <div></div>
-                        <section class="4u 6u(medium) 12u$(small)">
-                            <h3>You: {{ user.username }}</h3>
-                            <h5>Joined {{ user.date_joined }}</h5>
-                            <h5>Local Govt. {{ user.account.lga }} in {{ user.account.lga.state }}</h5>
-                            <h5>District: {{ user.account.lga.district }}</h5>
-                            <h5>Constituency: {{ user.account.lga.constituency }}</h5>
-                        </section>
-                        <section class="4u 6u$(medium) 12u$(small)">
-                            <h3>Conversations</h3>
-                            <p>There are no conversations yet.</p>
-                            <ul class="alt">
-                            </ul>
-                        </section>
-                        <section class="4u 6u$(medium) 12u$(small)">
-                            Reps member: ({% if user.account.lga.representative.is_active %}Active{% else %}Pending{% endif %}</li>)
-                            <ul>
-                                <li><strong>{{ user.account.lga.representative }}</strong></li>
-                                <li>Phone:</li>
-                                <li>Email: </li>
-                                <li>Twitter: </li>
-                                <li>Facebook: </li>
-                            </ul>
-                            Senator: ({% if user.account.lga.senator.is_active %}Active{% else %}Pending{% endif %}</li>)
-                            <ul>
-                                <li><strong>{{ user.account.lga.senator }}</strong></li>
-                                <li>Phone:</li>
-                                <li>Email: </li>
-                                <li>Twitter: </li>
-                                <li>Facebook: </li>
-                            </ul>
-                        </section>
-          <div></div>
+{% block pagetitle %}Conversations{% endblock pagetitle %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li class="active">Conversations</li>
+</ul>
+{% endblock breadcrumb %}
+
+{% block pagecontent %}
+    <div class="row">
+      <div class="col-md-3">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Info</h3>
+            </div>
+            <div class="panel-body">
+                <p>State  <strong>{{ user.account.lga.state }}</strong></p>
+                <p>LGA    <strong>{{ user.account.lga }}</strong></p>
+                <p>Senatorial district <strong>{{ user.account.lga.district }}</strong></p>
+                <p>Constituency <strong>{{ user.account.lga.constituency }}</strong></p>
+            </div>
+            <div class="panel-footer">
+                <p>Joined <strong>{{ user.date_joined }}</strong></p>
+                <p>0 posts</p>
+            </div>
+         </div>
+     </div>
+
+      <div class="col-md-6">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+                {% block midpanel-heading %}
+                <h3 class="panel-title">Conversations</h3>
+                {% endblock midpanel-heading %}
+            </div>
+            <div class="panel-body">
+                {% block midpanel-body %}
+                <div class="table-responsive">
+                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">
+                        <div id="DataTables_Table_0_filter" class="dataTables_filters">
+                            <label>
+                                <a href="{% url 'new_topic' %}"><span class="fa fa-plus">Start new Topic</span></a>
+                            </label>
+                        </div>
+
+                        <table id="DataTables_Table_0" class="table datatable dataTable no-footer" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting-asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">Topics</th>
+                                    <th class="sorting-asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">Posts</th>
+                                    <th class="sorting-asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">Views</th>
+                                    <th class="sorting-asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1">Last Post</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for topic in topics %}
+                            <tr class="{% cycle 'odd', 'even' %}">
+                                <td><a href="{% url 'topic' topic_id=topic.pk %}">{{ topic.name }}</a></td>
+                                <td>{{ topic.post_count }}</td>
+                                <td>{{ topic.views }}</td>
+                                <td>{{ topic.updated }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {% endblock midpanel-body %}
+            </div>
+            <div class="panel-footer">
+                {% block midpanel-footer %}
+                <p>{{ topics|length }} conversation{{ topics|pluralize }}</p>
+                {% endblock midpanel-footer %}
+            </div>
+         </div>
       </div>
-  </section>
-{% endblock middle %}
-{% block fb %}
-{% endblock fb %}
+
+      <div class="col-md-3">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Senator</h3>
+            </div>
+            <div class="panel-body">
+                <p><strong>{{ user.account.lga.senator }}</strong></p>
+                <p><span class="fa fa-phone"></span></p>
+                <p><span class="fa fa-envelope"></span></p>
+                <p><span class="fa fa-twitter"></span></p>
+                <p><span class="fa fa-facebook"></span></p>
+            </div>
+         </div>
+         <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">House of Reps</h3>
+            </div>
+            <div class="panel-body">
+                <p><strong>{{ user.account.lga.representative }}</strong></p>
+                <p><span class="fa fa-phone"></span></p>
+                <p><span class="fa fa-envelope"></span></p>
+                <p><span class="fa fa-twitter"></span></p>
+                <p><span class="fa fa-facebook"></span></p>
+            </div>
+         </div>
+     </div>
+
+   </div>
+{% endblock pagecontent %}
