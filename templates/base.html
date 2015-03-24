@@ -52,8 +52,12 @@
                     </li>
                     <li class="xn-openable">
                         <a href="#">
-                            <span class="xn-text">{{ user.username }}</span>
+                            <span class="xn-text"><strong>{{ user.username }}</strong></span>
+                    <span class="text-muted">&nbsp; Joined {{ user.date_joined }}</span>
                         </a>
+                    </li>
+                    <li class="xn-openable">
+                    <span class="xn-text">Joined <strong>{{ user.date_joined }}</strong></span>
                     </li>
                     <li class="xn-icon-button pull-right last">
                       <a href="{% url 'logout' %}">
