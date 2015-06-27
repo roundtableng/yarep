@@ -14,11 +14,11 @@ from django.contrib.auth import login, authenticate
 from django.conf import settings
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
+# from django.contrib import messages
 
 from reps.models import State, LGA
 from core.models import Account
-from core.forms import LoginForm, TopicForm, PostForm
+from core.forms import LoginForm, TopicForm, PostForm, RegistrationForm
 from pybb.models import Topic, Forum, Post
 
 request_token_url = 'https://twitter.com/oauth/request_token'
@@ -39,6 +39,20 @@ def get_default_forum():
         raise NotImplementedError('You need to create a forum')
     else:
         return forums[0]
+
+
+def registration(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            login_user(request, name, email, password)
+            return redirect('profile')
+    else:
+        form = RegistrationForm()
+    return render(request, 'core/registration.html', {'form': form})
 
 
 def login_user(request, name, email, password):
@@ -78,7 +92,7 @@ def fbauthenticated(request):
     data = cgi.parse_qs(resp.read())
     access_token = data['access_token'][-1]
 
-    #profile
+    # profile
     params = urllib.urlencode(dict(access_token=access_token))
     profile = json.load(urllib.urlopen(
         'https://graph.facebook.com/me?' + params))
@@ -121,7 +135,6 @@ def twtauthenticated(request):
     resp, content = client.request(access_token_url, 'GET')
     if resp['status'] != '200':
         return HttpResponse('Could not log you in. Please go back')
-        #return HttpResponse('Invalid response from Twitter')
     access_token = dict(cgi.parse_qsl(content))
 
     name = access_token['screen_name']
@@ -224,7 +237,6 @@ def get_lgas(request):
 
 def home(request):
     if request.method == 'POST':
-        #import pdb;pdb.set_trace()
         form = LoginForm(request.POST)
         if form.is_valid():
             user = form.cleaned_data['user']

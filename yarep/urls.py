@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^lga/$', 'core.views.select_lga', name='select_lga'),
     url(r'^get_lgas/$', 'core.views.get_lgas', name='get_lgas'),
     url(r'^$', 'core.views.home', name='home'),
+    url(r'^register/$', 'core.views.registration', name='registration'),
     url(r'^accounts/login/$',
         'django.contrib.auth.views.login',
         {'template_name': 'core/login.html'},

@@ -1,11 +1,25 @@
 from django import forms
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 
 class RegistrationForm(forms.Form):
-    email = forms.CharField(max_length=255)
-    name = forms.CharField(max_length=255)
-    pwd = forms.CharField(max_length=255)
+    name = forms.CharField(max_length=250)
+    email = forms.CharField(max_length=250)
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput)
+    pwd2 = forms.CharField(max_length=100, widget=forms.PasswordInput)
+
+    def clean_email(self):
+        if 'email' in self.cleaned_data:
+            if User.objects.filter(email=self.cleaned_data['email']):
+                raise forms.ValidationError('This email is already in use')
+            return self.cleaned_data['email']
+
+    def clean(self):
+        if 'password' in self.cleaned_data and 'pwd2' in self.cleaned_data:
+            if self.cleaned_data['password'] != self.cleaned_data['pwd2']:
+                raise forms.ValidationError("The passwords don't match")
+            return self.cleaned_data
 
 
 class LoginForm(forms.Form):
