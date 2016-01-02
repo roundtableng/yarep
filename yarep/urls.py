@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'^newtopic/$', 'core.views.new_topic', name='new_topic'),
     url(r'^topic/(?P<topic_id>\d+)/$', 'core.views.topic', name='topic'),
+    url(r'^tax/', include('tax.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

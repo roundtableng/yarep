@@ -1,0 +1,852 @@
+{% extends 'core/profile.html' %}
+{% load static from staticfiles %}
+
+{% block pagetitle %}Taxpayer Registration(Companies){% endblock pagetitle %}
+
+{% block extra-js %}
+<script type="text/javascript">
+    $(function(){
+        $('#id_name').attr('class', 'form-control');
+        $('#id_post').attr('class', 'form-control');
+    });
+        </script>
+{% endblock extra-js %}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+    <li class="active">Taxpayer Registration (Companies)</li>
+</ul>
+{% endblock breadcrumb %}
+
+{% block midpanel-heading %}
+    <h3 class="panel-title">Start New Topic</h3>
+{% endblock midpanel-heading %}
+
+{% block pagecontent %}
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal">
+                <div class="panel panel-default tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Tax Payer Info</a></li>
+                        <li><a href="#tab-second" role="tab" data-toggle="tab">Shares/Officers/Directors</a></li>
+                        <li><a href="#tab-third" role="tab" data-toggle="tab">Turnover</a></li>
+                        <li><a href="#tab-fourth" role="tab" data-toggle="tab">Payment</a></li>
+                    </ul>
+
+                    <div class="panel-body tab-content">
+						
+						<!-- START FIRST-TAB -->
+                        <div class="tab-pane active" id="tab-first">
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Taxpayer Identification Number</label>
+                                <div class="col-md-3 col-xs-6"> 
+                                    <input type="text" class="form-control" value=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Incorporation Number</label>
+                                <div class="col-md-3 col-xs-6"> 
+                                    <input type="text" class="form-control" value=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Incorporation Date</label>
+                                <div class="col-md-3 col-xs-6"> 
+                                    <div class="input-group">
+                                      <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                      <input type="text" class="form-control datepicker" value="2015-12-01"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Name of Company</label>
+                                <div class="col-md-6 col-xs-12"> 
+									<input type="text" class="form-control" value=""/>                         
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Registered Office</label>
+                                <div class="col-md-6 col-xs-12"> 
+                                    <textarea rows="3" class="form-control" value=""></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Business Address</label>
+                                <div class="col-md-6 col-xs-12"> 
+                                    <textarea rows="3" class="form-control" value=""></textarea>
+                                    <span class="help-block">If different from Registered Office</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Precise Nature of Business</label>
+                                <div class="col-md-6 col-xs-12"> 
+                                    <input type="text" class="form-control" value=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Business Code</label>
+                                <div class="col-md-6 col-xs-12"> 
+                                    <select class="form-control select">
+                                       <option>(01) Banks and Financial Institutions</option>
+                                       <option>(02) Agric and Plantation</option>
+                                   </select>
+                                </div>
+                            </div>
+							
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Date company commenced business</label>
+                                <div class="col-md-3 col-xs-6"> 
+                                    <div class="input-group">
+                                      <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                      <input type="text" class="form-control datepicker" value="2015-12-01"/>
+                                    </div>
+                                </div>
+                            </div>		
+							
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Accounting Date</label>
+                                <div class="col-md-3 col-xs-6"> 
+                                    <div class="input-group">
+                                      <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                      <input type="text" class="form-control datepicker" value="2015-12-01"/>
+									 
+                                    </div>
+									 <span class="help-block">Date in each year to which accounts will be made up to</span>
+                                </div>
+                            </div>	
+							
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Is the company a new business?</label>
+                                <div class="col-md-6 col-xs-12"> 
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked/>
+                                            The company is a new business
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"/>
+                                            The company was formed to carry on an existing trade
+                                        </label>
+                                    </div>                       
+                                </div>
+                            </div>	
+							
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Information about the former business</label>
+                                <div class="col-md-6 col-xs-12"> 
+									<textarea rows="3" class="form-control" value=""></textarea>
+									<span class="help-block">If the business was formed to carry on an existing trade</span>
+                                </div>
+                            </div>
+							
+                            <!-- START BANKERS INPUT -->
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h3>Name and Addresses of Bankers</h3>
+                                    <form role="form" class="form-horizontal">
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Name</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Name</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Name</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+                                    </form>
+                                </div>
+                            </div>                        
+                            <!-- END OF BANKERS INPUT -->		
+
+
+                        </div>
+						
+						<!-- END FIRST-TAB -->
+						
+						<!-- START SECOND-TAB -->
+						
+                        <div class="tab-pane" id="tab-second">
+							
+                            <!-- START SHAREHOLDERS INPUT -->
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h3>Particulars of Major Shareholders/Sponsors stating Names, Addresses numbers of shareholding</h3>
+                                       <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Name</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label"># of Shares</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Name</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label"># of Shares</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Name</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label"># of Shares</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Name</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label"># of Shares</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+                                
+                                </div>
+                            </div>                        
+                            <!-- END OF SHAREHOLDERS INPUT -->		
+							
+                            <!-- START OFFICERS INPUT -->
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+									
+                                    <h3>Names, Ranks and Addresses of Principal Officers of the company</h3>
+                            
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Name</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Rank</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Name</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Rank</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Name</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Rank</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Name</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Rank</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+								</div>
+                                   
+                            </div>                        
+                            <!-- END OF OFFICERS INPUT -->		
+							
+                            <!-- START DIRECTORS INPUT -->
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+									
+                                    <h3>All other Directorships held by each Director, stating the registered address of each company.</h3>
+                            
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Director</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Company</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Director</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Company</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Director</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Company</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Director</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Company</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Director</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Company</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+									   
+		                               <div class="form-group">
+		                                   <label class="col-md-1 col-xs-12 control-label">Director</label>
+		                                   <div class="col-md-3 col-xs-6">
+		                                     <input type="text" class="form-control" value=""/>
+									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Company</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+										    <label class="col-md-1 col-xs-12 control-label">Address</label>
+ 		                                   <div class="col-md-3 col-xs-6">
+ 		                                     <input type="text" class="form-control" value=""/>
+ 									 	   </div>
+		                               </div>
+							    </div>                                   
+                            </div>                        
+                            <!-- END OF DIRECTORS INPUT -->		
+							
+                        </div>
+						
+                       <!-- END SECOND-TAB -->
+					   
+					   <!-- START THIRD-TAB -->
+					   
+					   <div class="tab-pane" id="tab-third">
+						   
+						   <!-- START TURNOVER INPUT -->
+						   
+						   <div class="panel panel-default">
+							   <div class="panel-body">
+							   	<h3>Anual Turnover/Income (Details of Turnover in the last 3 years)</h3>
+								
+                               <div class="form-group">
+                                   <label class="col-md-1 col-xs-12 control-label">Year ended</label>
+                                   <div class="col-md-3 col-xs-6">
+                                       <div class="input-group">
+                                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                         <input type="text" class="form-control datepicker" value="2015-12-01"/>
+                                       </div>                                   
+							 	   </div>
+								    <label class="col-md-1 col-xs-12 control-label">Sales</label>
+                                   <div class="col-md-3 col-xs-6">
+                                     <input type="text" class="form-control" value=""/>
+							 	   </div>
+								    <label class="col-md-1 col-xs-12 control-label">Net Income</label>
+                                   <div class="col-md-3 col-xs-6">
+                                     <input type="text" class="form-control" value=""/>
+							 	   </div>
+                               </div>
+								
+                                <div class="form-group">
+                                    <label class="col-md-1 col-xs-12 control-label">Year ended</label>
+                                    <div class="col-md-3 col-xs-6">
+                                     <div class="input-group">
+                                       <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                       <input type="text" class="form-control datepicker" value="2015-12-01"/>
+                                     </div>
+ 							 	   </div>
+ 								    <label class="col-md-1 col-xs-12 control-label">Sales</label>
+                                    <div class="col-md-3 col-xs-6">
+                                      <input type="text" class="form-control" value=""/>
+ 							 	   </div>
+ 								    <label class="col-md-1 col-xs-12 control-label">Net Income</label>
+                                    <div class="col-md-3 col-xs-6">
+                                      <input type="text" class="form-control" value=""/>
+ 							 	   </div>
+                                </div>
+								
+                                <div class="form-group">
+                                    <label class="col-md-1 col-xs-12 control-label">Year ended</label>
+                                    <div class="col-md-3 col-xs-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                        <input type="text" class="form-control datepicker" value="2015-12-01"/>
+                                      </div>
+ 							 	   </div>
+ 								    <label class="col-md-1 col-xs-12 control-label">Sales</label>
+                                    <div class="col-md-3 col-xs-6">
+                                      <input type="text" class="form-control" value=""/>
+ 							 	   </div>
+ 								    <label class="col-md-1 col-xs-12 control-label">Net Income</label>
+                                    <div class="col-md-3 col-xs-6">
+                                      <input type="text" class="form-control" value=""/>
+ 							 	   </div>
+                                </div>
+								
+							   </div>
+						   </div>
+						   
+						   <!-- END TURNOVER INPUT -->
+						   
+						   <!-- START TURNOVER-OVERSEAS INPUT -->
+						   
+						   <div class="panel panel-default">
+							   <div class="panel-body">
+							   	<h3>Annual Turnover/Income from trade transacted outside Nigeria in the last 3 years</h3>
+								
+                               <div class="form-group">
+                                   <label class="col-md-1 col-xs-12 control-label">Year ended</label>
+                                   <div class="col-md-3 col-xs-6">
+                                     <div class="input-group">
+                                       <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                       <input type="text" class="form-control datepicker" value="2015-12-01"/>
+                                     </div>
+							 	   </div>
+								    <label class="col-md-1 col-xs-12 control-label">Sales</label>
+                                   <div class="col-md-3 col-xs-6">
+                                     <input type="text" class="form-control" value=""/>
+							 	   </div>
+								    <label class="col-md-1 col-xs-12 control-label">Net Income</label>
+                                   <div class="col-md-3 col-xs-6">
+                                     <input type="text" class="form-control" value=""/>
+							 	   </div>
+                               </div>
+								
+                                <div class="form-group">
+                                    <label class="col-md-1 col-xs-12 control-label">Year ended</label>
+                                    <div class="col-md-3 col-xs-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                        <input type="text" class="form-control datepicker" value="2015-12-01"/>
+                                      </div>
+ 							 	   </div>
+ 								    <label class="col-md-1 col-xs-12 control-label">Sales</label>
+                                    <div class="col-md-3 col-xs-6">
+                                      <input type="text" class="form-control" value=""/>
+ 							 	   </div>
+ 								    <label class="col-md-1 col-xs-12 control-label">Net Income</label>
+                                    <div class="col-md-3 col-xs-6">
+                                      <input type="text" class="form-control" value=""/>
+ 							 	   </div>
+                                </div>
+								
+                                <div class="form-group">
+                                    <label class="col-md-1 col-xs-12 control-label">Year ended</label>
+                                    <div class="col-md-3 col-xs-6">
+                                      <div class="input-group">
+                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                        <input type="text" class="form-control datepicker" value="2015-12-01"/>
+                                      </div>
+ 							 	   </div>
+ 								    <label class="col-md-1 col-xs-12 control-label">Sales</label>
+                                    <div class="col-md-3 col-xs-6">
+                                      <input type="text" class="form-control" value=""/>
+ 							 	   </div>
+ 								    <label class="col-md-1 col-xs-12 control-label">Net Income</label>
+                                    <div class="col-md-3 col-xs-6">
+                                      <input type="text" class="form-control" value=""/>
+ 							 	   </div>
+                                </div>
+								
+							   </div>
+						   </div>
+						   
+						   <!-- END TURNOVER-OVERSEAS INPUT -->
+						   
+						   <!-- START RELATED-COMPANIES INPUT -->
+						   
+						   <div class="panel panel-default">
+							   <div class="panel-body">
+							   	<h3>Particulars of Related/Associated companies or organisations located within and outside Nigeria</h3>
+								
+                               <div class="form-group">
+                                   <label class="col-md-3 col-xs-12 control-label">Name &amp; Address</label>
+                                   <div class="col-md-6 col-xs-12">
+                                     <input type="text" class="form-control" value=""/>
+							 	   </div>
+                               </div>
+								
+                               <div class="form-group">
+                                   <label class="col-md-3 col-xs-12 control-label">Name &amp; Address</label>
+                                   <div class="col-md-6 col-xs-12">
+                                     <input type="text" class="form-control" value=""/>
+							 	   </div>
+                               </div>
+							   
+                               <div class="form-group">
+                                   <label class="col-md-3 col-xs-12 control-label">Name &amp; Address</label>
+                                   <div class="col-md-6 col-xs-12">
+                                     <input type="text" class="form-control" value=""/>
+							 	   </div>
+                               </div>
+							   
+                               <div class="form-group">
+                                   <label class="col-md-3 col-xs-12 control-label">Name &amp; Address</label>
+                                   <div class="col-md-6 col-xs-12">
+                                     <input type="text" class="form-control" value=""/>
+							 	   </div>
+                               </div>
+								
+							   </div>
+						   </div>
+						   
+						   <!-- END RELATED-COMPANIES INPUT -->
+						   
+						
+					   </div>
+					   
+					   <!-- END THIRD-TAB -->
+					   
+					   <!-- START FOURTH-TAB -->
+					   <div class="tab-pane" id="tab-fourth">
+						   
+						   <!-- START TAX-REP INPUT -->
+						   <div class="panel panel-default">
+						   	<div class="panel-body">
+								<h3>Name Address of Auditors, Tax Representative (as required under section 41 (6) of CITA) and any other Agent(s), if these have been appointed.</h3>
+						   </div>
+						   
+						   <div class="form-group">
+						   		<label class="col-md-1 col-xs-12 control-label">Auditor Name</label>
+                            	<div class="col-md-3 col-xs-6">
+                             	 	<input type="text" class="form-control" value=""/>
+					 	   		</div>
+						    	<label class="col-md-1 col-xs-12 control-label">Address</label>
+                            	<div class="col-md-3 col-xs-6">
+                              		<input type="text" class="form-control" value=""/>
+					 	   	 	</div>
+						   </div>
+						   
+						   <div class="form-group">
+						   		<label class="col-md-1 col-xs-12 control-label">Auditor Name</label>
+                            	<div class="col-md-3 col-xs-6">
+                             	 	<input type="text" class="form-control" value=""/>
+					 	   		</div>
+						    	<label class="col-md-1 col-xs-12 control-label">Address</label>
+                            	<div class="col-md-3 col-xs-6">
+                              		<input type="text" class="form-control" value=""/>
+					 	   	 	</div>
+						   </div>
+						   
+						   <div class="form-group">
+						   		<label class="col-md-1 col-xs-12 control-label">Tax Rep. Name</label>
+                            	<div class="col-md-3 col-xs-6">
+                             	 	<input type="text" class="form-control" value=""/>
+					 	   		</div>
+						    	<label class="col-md-1 col-xs-12 control-label">Address</label>
+                            	<div class="col-md-3 col-xs-6">
+                              		<input type="text" class="form-control" value=""/>
+					 	   	 	</div>
+						   </div>
+						   
+						   <div class="form-group">
+						   		<label class="col-md-1 col-xs-12 control-label">Tax Rep. Name</label>
+                            	<div class="col-md-3 col-xs-6">
+                             	 	<input type="text" class="form-control" value=""/>
+					 	   		</div>
+						    	<label class="col-md-1 col-xs-12 control-label">Address</label>
+                            	<div class="col-md-3 col-xs-6">
+                              		<input type="text" class="form-control" value=""/>
+					 	   	 	</div>
+						   </div>
+						   <!-- END TAX-REP INPUT -->
+					   </div>
+					   
+					   	   <!-- START BRANCHES INPUT -->
+						   
+						   <div class="panel panel-default">
+						   		<div class="panel-body">
+									<h3>List of branches and their addresses for the purpose of payment of Value Added Tax</h3>
+						   	 	</div>
+								
+	 						   <div class="form-group">
+	 						   		<label class="col-md-1 col-xs-12 control-label">Branch Location</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                              	 	<input type="text" class="form-control" value=""/>
+	 					 	   		</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">Address</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">State</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">LGA</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						   </div>
+							   
+	 						   <div class="form-group">
+	 						   		<label class="col-md-1 col-xs-12 control-label">Branch Location</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                              	 	<input type="text" class="form-control" value=""/>
+	 					 	   		</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">Address</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">State</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">LGA</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						   </div>
+							   
+	 						   <div class="form-group">
+	 						   		<label class="col-md-1 col-xs-12 control-label">Branch Location</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                              	 	<input type="text" class="form-control" value=""/>
+	 					 	   		</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">Address</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">State</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">LGA</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						   </div>
+							   
+	 						   <div class="form-group">
+	 						   		<label class="col-md-1 col-xs-12 control-label">Branch Location</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                              	 	<input type="text" class="form-control" value=""/>
+	 					 	   		</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">Address</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">State</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">LGA</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						   </div>
+							   
+	 						   <div class="form-group">
+	 						   		<label class="col-md-1 col-xs-12 control-label">Branch Location</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                              	 	<input type="text" class="form-control" value=""/>
+	 					 	   		</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">Address</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">State</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">LGA</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						   </div>
+							   
+	 						   <div class="form-group">
+	 						   		<label class="col-md-1 col-xs-12 control-label">Branch Location</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                              	 	<input type="text" class="form-control" value=""/>
+	 					 	   		</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">Address</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">State</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						    	<label class="col-md-1 col-xs-12 control-label">LGA</label>
+	                             	<div class="col-md-2 col-xs-6">
+	                               		<input type="text" class="form-control" value=""/>
+	 					 	   	 	</div>
+	 						   </div>
+							   
+							   <div class="panel-footer">
+							   	   <button class="btn btn-primary pull-right">Submit</button>
+							   </div>
+	 						 
+					   	   </div>
+						   
+						   <!-- END BRANCHES INPUT -->
+					   
+					     
+					   
+					   <!-- END FOURTH-TAB -->
+					  
+					</div>
+										
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock pagecontent %}
+
+{% block midpanel-body %}
+<form action="" class="form-horizontal" method="post">{% csrf_token %}
+<div class="form-group{% if form.name.errors %} has-error{% endif %}">
+    <label class="control-label col-md-2 col-xs-12">Topic</label>
+    <div class="col-md-8 col-xs-12">
+        {% if form.name.errors %}
+             <label class="control-label">{{ form.name.errors }}</label>
+        {% endif %}
+        {{ form.name }}
+    </div>
+</div>
+
+<div class="form-group{% if form.post.errors %} has-error{% endif %}">
+    <label class="control-label col-md-2 col-xs-12">Post</label>
+    <div class="col-md-8 col-xs-12">
+        {% if form.post.errors %}
+             <label class="control-label">{{ form.post.errors }}</label>
+        {% endif %}
+        {{ form.post }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+        <button class="btn btn-block btn-primary">Post</button>
+    </div>
+</div>
+</form>
+{% endblock midpanel-body %}
+
+{% block midpanel-footer %}
+{% endblock midpanel-footer %}
