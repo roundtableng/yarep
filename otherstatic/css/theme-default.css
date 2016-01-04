@@ -5583,6 +5583,9 @@ td.dataTables_empty {
 .flag.flag-cn {
   background-image: url(../img/flags/cn.png);
 }
+.flag.flag-ng {
+	background-image: url(../img/flags/ng.png);
+}
 /* END FLAGS */
 /* PAGE LOADING FRAME */
 .page-loading-frame {
@@ -8765,6 +8768,10 @@ li.ext_zip {
   }
   .ui-resizable-se {
     background-image: url("../img/jqyery/resize-icon@2x.png");
+  }
+  .x-navigation > li.xn-logos > a:first-child {
+    background-image: url("../img/logo@2x.png");
+    background-size: 220px 50px;
   }
   .x-navigation > li.xn-logo > a:first-child {
     background-image: url("../img/logo@2x.png");
