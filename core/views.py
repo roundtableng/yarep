@@ -244,7 +244,8 @@ def home(request):
             return redirect('profile')
     else:
         form = LoginForm()
-    return render(request, 'core/home.html', {'form': form})
+    #return render(request, 'core/home.html', {'form': form})
+    return render(request, 'core/pages-login.html', {'form': form})
 
 
 def replist(request):
