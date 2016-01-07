@@ -6,10 +6,79 @@
 {% block extra-js %}
 <script type="text/javascript">
     $(function(){
-        $('#id_name').attr('class', 'form-control');
-        $('#id_post').attr('class', 'form-control');
+		var total_output = 0;
+		
+		
+		$('#s_calc').click(function(){
+			var total = $('#s_total').val();
+			var zero = $('#s_exempted').val();
+			var adjust = $('#s_adjustment').val();
+			var s_adjust = 0;
+			if (isNaN(zero))
+				zero = 0;
+			if (!isNaN(adjust))
+				s_adjust = parseInt(adjust);
+		
+			
+			if (isNaN(total)){
+				alert("Please enter a valid value for Total supplies (Note: don't use currency symbols)");
+			} else {
+				var s_vat = parseFloat(total).toFixed(2) - parseFloat(zero).toFixed(2);
+				var s_charged = 5 * s_vat / 100;
+				var typecharged = typeof s_charged;
+				var typeadjust = typeof s_adjust;
+				//console.log(typeadjust);
+				//console.log(typecharged);
+				var s_output = s_charged + s_adjust;
+				$('#s_vat').val(s_vat);
+				$('#s_charged').val(s_charged);
+				$('#s_output').val(s_output);
+				total_output = s_output;
+			}
+			
+		});
+		
+		$('#p_calc').click(function(){
+			//console.log("Total output is " + total_output);
+			var supplies = $('#p_supplies').val();
+			var adjust = $('#p_adjust').val();
+			var pimport = $('#p_import').val();	
+			//var total = $('#p_total').val();
+			var unused = $('#p_unused').val();
+			var source = $('#p_source').val();
+			
+			var p_supplies = 0;
+			var p_adjust = 0;
+			var p_import = 0;
+			var p_unused = 0;
+			var p_source = 0;
+			
+			if (!isNaN(supplies))
+				p_supplies = parseFloat(supplies);
+			
+			if (!isNaN(adjust))
+				p_adjust = parseFloat(adjust);
+			
+			if (!isNaN(pimport))
+				p_import = parseFloat(pimport);
+			
+			var p_total = p_supplies + p_adjust + p_import;
+			
+			if (!isNaN(unused))
+				p_unused = parseFloat(unused);
+			
+			if (!isNaN(source))
+				p_source = parseFloat(source);
+			
+			var total_deduction = p_total - p_unused - p_source;
+			var total_payable = total_output - total_deduction;
+			
+			$('#p_total').val(p_total.toFixed(2));
+			$('#id_total_deduction').val(total_deduction.toFixed(2));
+			$('#id_total_payable').val(total_payable.toFixed(2));
+		});
     });
-        </script>
+</script>
 {% endblock extra-js %}
 
 	{% block breadcrumb %}
@@ -108,40 +177,43 @@
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">Total supplies made in period (with VAT)</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input id="s_total" type="text" class="form-control" value=""/>
 		                                </div>
 		                            </div>
 									
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">Exempted/Zero-rated supplies</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input id="s_exempted" type="text" class="form-control" value=""/>
 		                                </div>
 		                            </div>
 									
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">Total supplies subject to VAT</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input id="s_vat" type="text" class="form-control" value="" disabled />
 		                                </div>
 		                            </div>
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">VAT charged by you</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input id="s_charged" type="text" class="form-control" value="" disabled />
 		                                </div>
 		                            </div>
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">VAT adjustment</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input id="s_adjustment" type="text" class="form-control" value="" />
 		                                </div>
 		                            </div>
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">Total Output VAT</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input id="s_output" type="text" class="form-control" value=""/>
 		                                </div>
+										<div class="col-md-3 col-xs-6">
+											<button class="btn btn-default pull-left" type="button" id="s_calc">Calculate</button>
+										</div>
 		                            </div>
 									
 		                     
@@ -158,41 +230,44 @@
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">VAT on Domestic supplies/purchases</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input type="text" class="form-control" value="" id="p_supplies" />
 		                                </div>
 		                            </div>
 									
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">VAT adjustment</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input type="text" class="form-control" value="" id="p_adjust" />
 		                                </div>
 		                            </div>
 									
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">VAT on imports (where applicable)</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input type="text" class="form-control" value="" id="p_import" />
 		                                </div>
 		                            </div>
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">Total VAT payable by you</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input type="text" class="form-control" value="" id="p_total" disabled />
 		                                </div>
 		                            </div>
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">VAT on purchases not wholly used in making VATable supplies</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input type="text" class="form-control" value="" id="p_unused" />
 		                                </div>
 										<span class="help-block"></span>
 		                            </div>
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">VAT taken at source</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input type="text" class="form-control" value="" id="p_source" />
 		                                </div>
+										<div class="col-md-3 col-xs-6">
+											<button class="btn btn-default pull-left" type="button" id="p_calc">Calculate</button>
+										</div>
 		                            </div>
 									
 		                     
@@ -209,16 +284,20 @@
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">Total Deductions (Input Tax)</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input type="text" class="form-control" value="" id="id_total_deduction" disabled />
 		                                </div>
 		                            </div>
 									
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">Amount payable/refundable</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input type="text" class="form-control" value=""/>
+		                                    <input type="text" class="form-control" value="" id="id_total_payable" disabled />
 		                                </div>
 		                            </div>
+									
+	 							   <div class="panel-footer">
+	 							   	   <button class="btn btn-primary pull-right">Submit</button>
+	 							   </div>
 		                    
                                 </div>
                             </div>                        

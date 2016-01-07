@@ -433,7 +433,7 @@
         <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
         <!-- END PRELOADS -->             
         
-    {% block extra-footer-js %}
+    {% block footer-js %}
     <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
         <script type="text/javascript" src="{% static 'js/plugins/jquery/jquery.min.js' %}"></script>
@@ -458,7 +458,10 @@
         <script type="text/javascript" src="{% static 'js/actions.js' %}"></script>        
         <!-- END TEMPLATE -->
     <!-- END SCRIPTS -->                   
-    {% endblock extra-footer-js %}
+    {% endblock footer-js %}
+	
+	{% block extra-footer-js %}
+	{% endblock extra-footer-js %}
     </body>
 </html>
 
