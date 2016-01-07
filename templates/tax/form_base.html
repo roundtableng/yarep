@@ -79,10 +79,11 @@
                         </ul>
                     </li>
                     <li class="xn-openable">
-                        <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Transaction History</span></a>
+                        <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Transaction</span></a>
                         <ul>
+							<li><a href="{% url 'vat' %}">VAT Returns</a></li>
+							<li><a href="{% url 'company_reg' %}">Registration</a></li>
                             <li><a href="#">History</a></li>
-                       
                         </ul>
                     </li>              
                     <li class="xn-openable">
@@ -230,6 +231,7 @@
                 </ul>
                 <!-- END X-NAVIGATION VERTICAL -->                   
                 
+				{% block breadcrumb %}
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
@@ -237,6 +239,7 @@
                     <li class="active">Company Registration</li>
                 </ul>
                 <!-- END BREADCRUMB -->
+				{% endblock breadcrumb %}
                 
                 <!-- PAGE CONTENT WRAPPER -->
                 {% block pagecontent %}

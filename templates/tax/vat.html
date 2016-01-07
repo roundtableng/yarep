@@ -1,0 +1,274 @@
+{% extends 'tax/form_base.html' %}
+{% load static from staticfiles %}
+
+{% block pagetitle %}Taxpayer Registration(Companies){% endblock pagetitle %}
+
+{% block extra-js %}
+<script type="text/javascript">
+    $(function(){
+        $('#id_name').attr('class', 'form-control');
+        $('#id_post').attr('class', 'form-control');
+    });
+        </script>
+{% endblock extra-js %}
+
+	{% block breadcrumb %}
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Tax</a></li>
+        <li class="active">Value Added Tax Return</li>
+    </ul>
+    <!-- END BREADCRUMB -->
+	{% endblock breadcrumb %}
+
+{% block midpanel-heading %}
+    <h3 class="panel-title">Start New Topic</h3>
+{% endblock midpanel-heading %}
+
+{% block link %}
+
+{% endblock link %}
+
+{% block pagecontent %}
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal">
+                <div class="panel panel-default tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">VAT</a></li>
+     
+                    </ul>
+
+                    <div class="panel-body tab-content">
+						
+						<!-- START FIRST-TAB -->
+                        <div class="tab-pane active" id="tab-first">
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Taxpayer Identification Number</label>
+                                <div class="col-md-3 col-xs-6"> 
+                                    <input type="text" class="form-control" value=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Name</label>
+                                <div class="col-md-3 col-xs-6"> 
+                                    <input type="text" class="form-control" value=""/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Address</label>
+                                <div class="col-md-6 col-xs-12"> 
+                                    <textarea rows="3" class="form-control" value=""></textarea>
+                                </div>
+                            </div>
+							
+                            <!-- START MONTH INPUT -->
+                            <div class="panel panel-default">
+								
+                                <div class="panel-body">
+                                    <h3>Time covered by this return</h3>
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">Start of Month</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <div class="input-group">
+		                                      <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+		                                      <input type="text" class="form-control datepicker" value="2015-12-01"/>
+									 
+		                                    </div>
+										
+		                                </div>
+		                            </div>
+									
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">End of Month</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <div class="input-group">
+		                                      <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+		                                      <input type="text" class="form-control datepicker" value="2015-12-01"/>
+									 
+		                                    </div>
+										
+		                                </div>
+		                            </div>
+                                </div>
+                            </div>                        
+                            <!-- END OF MONTH INPUT -->		
+							
+                            <!-- START SUPPLIES INPUT -->
+                            <div class="panel panel-default">
+								
+                                <div class="panel-body">
+                                    <h3>(Supplies/Income) VAT on supplies made by you</h3>
+									
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">Total supplies made in period (with VAT)</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+									
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">Exempted/Zero-rated supplies</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+									
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">Total supplies subject to VAT</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">VAT charged by you</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">VAT adjustment</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">Total Output VAT</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+									
+		                     
+                                </div>
+                            </div>                        
+                            <!-- END OF SUPPLIES INPUT -->
+							
+                            <!-- START PURCHASES INPUT -->
+                            <div class="panel panel-default">
+								
+                                <div class="panel-body">
+                                    <h3>(Purchases/Expenses) Deduction of VAT of purchases made</h3>
+									
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">VAT on Domestic supplies/purchases</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+									
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">VAT adjustment</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+									
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">VAT on imports (where applicable)</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">Total VAT payable by you</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">VAT on purchases not wholly used in making VATable supplies</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+										<span class="help-block"></span>
+		                            </div>
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">VAT taken at source</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+									
+		                     
+                                </div>
+                            </div>                        
+                            <!-- END OF PURCHASES INPUT -->
+							
+                            <!-- START TOTAL INPUT -->
+                            <div class="panel panel-default">
+								
+                                <div class="panel-body">
+                                    <h3>TOTAL DEDUCTIONS</h3>
+									
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">Total Deductions (Input Tax)</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+									
+		                            <div class="form-group">
+		                                <label class="col-md-3 col-xs-12 control-label">Amount payable/refundable</label>
+		                                <div class="col-md-3 col-xs-6"> 
+		                                    <input type="text" class="form-control" value=""/>
+		                                </div>
+		                            </div>
+		                    
+                                </div>
+                            </div>                        
+                            <!-- END OF TOTAL INPUT -->
+
+
+                        </div>
+						
+						<!-- END FIRST-TAB -->
+						
+			   
+					  
+					</div>
+										
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock pagecontent %}
+
+{% block midpanel-body %}
+<form action="" class="form-horizontal" method="post">{% csrf_token %}
+<div class="form-group{% if form.name.errors %} has-error{% endif %}">
+    <label class="control-label col-md-2 col-xs-12">Topic</label>
+    <div class="col-md-8 col-xs-12">
+        {% if form.name.errors %}
+             <label class="control-label">{{ form.name.errors }}</label>
+        {% endif %}
+        {{ form.name }}
+    </div>
+</div>
+
+<div class="form-group{% if form.post.errors %} has-error{% endif %}">
+    <label class="control-label col-md-2 col-xs-12">Post</label>
+    <div class="col-md-8 col-xs-12">
+        {% if form.post.errors %}
+             <label class="control-label">{{ form.post.errors }}</label>
+        {% endif %}
+        {{ form.post }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+        <button class="btn btn-block btn-primary">Post</button>
+    </div>
+</div>
+</form>
+{% endblock midpanel-body %}
+
+{% block midpanel-footer %}
+{% endblock midpanel-footer %}
