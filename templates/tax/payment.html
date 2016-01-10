@@ -1,0 +1,132 @@
+{% extends 'tax/form_base.html' %}
+{% load static from staticfiles %}
+
+{% block pagetitle %}Payment{% endblock pagetitle %}
+
+
+	{% block breadcrumb %}
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Tax</a></li>
+        <li class="active">Value Added Tax Payment</li>
+    </ul>
+    <!-- END BREADCRUMB -->
+	{% endblock breadcrumb %}
+
+{% block midpanel-heading %}
+    <h3 class="panel-title">Start New Topic</h3>
+{% endblock midpanel-heading %}
+
+{% block link %}
+
+{% endblock link %}
+
+{% block pagecontent %}
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal">
+                <div class="panel panel-default tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Payment</a></li>
+     
+                    </ul>
+
+                    <div class="panel-body tab-content">
+						
+						<!-- START FIRST-TAB -->
+                        <div class="tab-pane active" id="tab-first">
+							
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Card Type</label>
+                                <div class="col-md-3 col-xs-12"> 
+                                    <select class="form-control select">
+                                       <option>MasterCard</option>
+                                       <option>VISA</option>
+									   <option>Verve</option>
+                                   </select>
+                                </div>
+                            </div>
+							
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Card Number</label>
+                                <div class="col-md-3 col-xs-6"> 
+                                    <input type="text" class="form-control" value="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Full Name</label>
+                                <div class="col-md-3 col-xs-6"> 
+                                    <input type="text" class="form-control" value="" />
+                                </div>
+                            </div>
+							
+                            <div class="form-group">
+                                <label class="col-md-3 col-xs-12 control-label">Expiry Date</label>
+                                <div class="col-md-3 col-xs-6"> 
+                                    <div class="input-group">
+                                      <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                      <input type="text" class="form-control datepicker" value="2015-12-01"/>
+                                    </div>
+                                </div>
+                            </div>
+							
+                            <div class="form-group">
+                             <label class="col-md-3 col-xs-12 control-label"></label>
+                                <div class="col-md-3 col-xs-6"> 
+									
+                                    <input type="button" class="form-control" value="Pay" />
+                                </div>
+                            </div>
+			
+
+                        </div>
+						
+						<!-- END FIRST-TAB -->
+						
+			   
+					  
+					</div>
+										
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock pagecontent %}
+
+{% block midpanel-body %}
+<form action="" class="form-horizontal" method="post">{% csrf_token %}
+<div class="form-group{% if form.name.errors %} has-error{% endif %}">
+    <label class="control-label col-md-2 col-xs-12">Topic</label>
+    <div class="col-md-8 col-xs-12">
+        {% if form.name.errors %}
+             <label class="control-label">{{ form.name.errors }}</label>
+        {% endif %}
+        {{ form.name }}
+    </div>
+</div>
+
+<div class="form-group{% if form.post.errors %} has-error{% endif %}">
+    <label class="control-label col-md-2 col-xs-12">Post</label>
+    <div class="col-md-8 col-xs-12">
+        {% if form.post.errors %}
+             <label class="control-label">{{ form.post.errors }}</label>
+        {% endif %}
+        {{ form.post }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+        <button class="btn btn-block btn-primary">Post</button>
+    </div>
+</div>
+</form>
+{% endblock midpanel-body %}
+
+{% block midpanel-footer %}
+{% endblock midpanel-footer %}

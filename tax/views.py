@@ -16,3 +16,7 @@ def vat(request):
 
 def history(request):
     return render(request, 'tax/history.html', {})
+
+
+def payment(request):
+    return render(request, 'tax/payment.html', {})
