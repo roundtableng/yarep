@@ -12,3 +12,7 @@ def company_reg(request):
 
 def vat(request):
     return render(request, 'tax/vat.html', {})
+
+
+def history(request):
+    return render(request, 'tax/history.html', {})

@@ -77,6 +77,10 @@
 			$('#id_total_deduction').val(total_deduction.toFixed(2));
 			$('#id_total_payable').val(total_payable.toFixed(2));
 		});
+		$('#id_save').click(function(){
+			alert('hey');
+			//window.location = "{% url 'history' %}";
+		}
     });
 </script>
 {% endblock extra-js %}
@@ -296,7 +300,8 @@
 		                            </div>
 									
 	 							   <div class="panel-footer">
-	 							   	   <button class="btn btn-primary pull-right">Submit</button>
+	 							   	   <a href="{% url 'history' %}"><span class="btn btn-primary pull-left" id="id_save">Save</span></a>
+									    <button class="btn btn-primary pull-right" id="id_pay">Pay</button>
 	 							   </div>
 		                    
                                 </div>

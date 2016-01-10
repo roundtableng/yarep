@@ -1,0 +1,101 @@
+{% extends 'tax/form_base.html' %}
+{% load static from staticfiles %}
+
+{% block pagetitle %}Payment History{% endblock pagetitle %}
+
+	{% block breadcrumb %}
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Tax</a></li>
+        <li class="active">Payment History</li>
+    </ul>
+    <!-- END BREADCRUMB -->
+	{% endblock breadcrumb %}
+	
+
+{% block pagecontent %}
+                <!-- PAGE CONTENT WRAPPER -->
+                <div class="page-content-wrap">                
+                
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <!-- START SIMPLE DATATABLE -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">                                
+                                    <h3 class="panel-title">Payment History</h3>   
+                                    <ul class="panel-controls">
+                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                                    </ul>                                
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table datatable_simple">
+                                            <thead>
+                                                <tr>
+                                                    <th>Start date</th>
+													<th>End date</th>
+                                                    <th>Amount Payable</th>
+													<th>Amount Paid</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                  
+                                                    <td>2011/04/25</td>
+													<td>2011/05/24</td>
+                                                    <td>N20,800</td>
+													<td>N17,800</td>
+                                                </tr>
+                                                <tr>
+                                                  
+                                                    <td>2011/05/25</td>
+													<td>2011/06/24</td>
+                                                    <td>N20,800</td>
+													<td>N17,800</td>
+                                                </tr>
+                                                <tr>
+                                                  
+                                                    <td>2011/06/25</td>
+													<td>2011/07/24</td>
+                                                    <td>N20,800</td>
+													<td>N17,800</td>
+                                                </tr>
+                                                <tr>
+                                                  
+                                                    <td>2011/07/25</td>
+													<td>2011/08/24</td>
+                                                    <td>N20,800</td>
+													<td>N17,800</td>
+                                                </tr>
+                                              
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END SIMPLE DATATABLE -->
+
+                        </div>
+                    </div>                                
+                    
+                </div>
+                <!-- PAGE CONTENT WRAPPER -->   
+				  {% endblock pagecontent %}                             
+            
+      
+   
+	
+	{% block extra-footer-js %}
+	       <script type="text/javascript" src="{% static 'js/plugins/datatables/jquery.dataTables.min.js' %}"></script>  
+	{% endblock extra-footer-js %}
+
+
+
+
+
+
+
