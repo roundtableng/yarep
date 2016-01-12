@@ -3,10 +3,13 @@
 
 {% block pagetitle %}Taxpayer Registration(Companies){% endblock pagetitle %}
 
+
 {% block extra-js %}
 <script type="text/javascript">
     $(function(){
 		var total_output = 0;
+		
+		$('.form-control[disabled]').css('color', '#000');
 		
 		
 		$('#s_calc').click(function(){
@@ -16,9 +19,14 @@
 			var s_adjust = 0;
 			if (isNaN(zero))
 				zero = 0;
-			if (!isNaN(adjust))
+			if (isNaN(adjust)){
+				s_adjust = 0;
+				
+			} else {
+				//console.log("adjust is " + adjust);
 				s_adjust = parseInt(adjust);
-		
+				//console.log("s_adjust is " + s_adjust);
+			}
 			
 			if (isNaN(total)){
 				alert("Please enter a valid value for Total supplies (Note: don't use currency symbols)");
@@ -27,12 +35,13 @@
 				var s_charged = 5 * s_vat / 100;
 				var typecharged = typeof s_charged;
 				var typeadjust = typeof s_adjust;
-				//console.log(typeadjust);
-				//console.log(typecharged);
+				//console.log(s_charged);
+				//console.log(s_adjust);
+				//console.log(adjust);
 				var s_output = s_charged + s_adjust;
-				$('#s_vat').val(s_vat);
-				$('#s_charged').val(s_charged);
-				$('#s_output').val(s_output);
+				$('#s_vat').val(s_vat.toLocaleString("en-GB", {minimumFractionDigits: 2}));
+				$('#s_charged').val(s_charged.toLocaleString("en-GB", {minimumFractionDigits: 2}));
+				$('#s_output').val(s_output.toLocaleString("en-GB", {minimumFractionDigits: 2}));
 				total_output = s_output;
 			}
 			
@@ -73,9 +82,12 @@
 			var total_deduction = p_total - p_unused - p_source;
 			var total_payable = total_output - total_deduction;
 			
-			$('#p_total').val(p_total.toFixed(2));
-			$('#id_total_deduction').val(total_deduction.toFixed(2));
-			$('#id_total_payable').val(total_payable.toFixed(2));
+			$('#p_total').val(p_total.toLocaleString("en-GB", {minimumFractionDigits: 2}));
+			$('#id_total_deduction').val("N" + total_deduction.toLocaleString("en-GB", {minimumFractionDigits: 2}));
+			$('#id_total_payable').val("N" + total_payable.toLocaleString("en-GB", {minimumFractionDigits: 2}));
+			//$('#id_total_payable').val(total_payable.toFixed(2));
+			
+			$('#pay_link').attr('href', "/tax/payment/?amount="+total_payable.toFixed(2));
 		});
 	
     });
@@ -210,7 +222,7 @@
 		                            <div class="form-group">
 		                                <label class="col-md-3 col-xs-12 control-label">Total Output VAT</label>
 		                                <div class="col-md-3 col-xs-6"> 
-		                                    <input id="s_output" type="text" class="form-control" value=""/>
+		                                    <input id="s_output" type="text" class="form-control" value="" disabled />
 		                                </div>
 										<div class="col-md-3 col-xs-6">
 											<button class="btn btn-default pull-left" type="button" id="s_calc">Calculate</button>
@@ -299,7 +311,7 @@
 									
 	 							   <div class="panel-footer">
 	 							   	   <a href="{% url 'history' %}"><span class="btn btn-primary pull-left" id="id_save">Save</span></a>
-									    <a href="{% url 'payment' %}"><span class="btn btn-primary pull-right" id="id_pay">Pay</span></a>
+									    <a id="pay_link" href="{% url 'payment' %}"><span class="btn btn-primary pull-right" id="id_pay">Pay</span></a>
 	 							   </div>
 		                    
                                 </div>
