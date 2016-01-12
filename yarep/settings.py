@@ -132,4 +132,4 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'pybb.context_processors.processor',
 )
 
-LOGIN_REDIRECT_URL = '/tax/history/'
+LOGIN_REDIRECT_URL = '/profile/'
