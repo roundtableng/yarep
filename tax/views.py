@@ -20,3 +20,7 @@ def history(request):
 
 def payment(request):
     return render(request, 'tax/payment.html', {})
+
+
+def dashboard(request):
+    return render(request, 'tax/dash.html', {})
